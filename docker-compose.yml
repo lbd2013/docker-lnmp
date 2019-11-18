@@ -58,6 +58,16 @@ services:
     restart: always
     container_name: redis
 
+    myadmin:
+      image: phpmyadmin/phpmyadmin
+      restart: always
+      ports:
+        - 8080:80
+      environment:
+        PMA_HOST: mysql
+      networks:
+        - backend
+
 networks:
   frontend:
   backend:
