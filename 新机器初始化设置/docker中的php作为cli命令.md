@@ -5,9 +5,7 @@
 这对于日常开发来说并不方便，
 
 
-## 方法
-Alias
-为命令起一个别名，如：
+####Alias 为命令起一个别名，如：
 ```
 alias php='docker exec php php' 
 ```
