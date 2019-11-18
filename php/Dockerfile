@@ -22,20 +22,14 @@ RUN cd ~ \
     && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
 
-    && apk add libstdc++ libpng-dev \
+    && apk add libstdc++ libpng-dev zip libzip-dev \
     && cd ~ \
     && wget https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
     && tar -zxvf v$SWOOLE_VERSION.tar.gz \
     && mkdir -p /usr/src/php/ext \
     && mv swoole-src-$SWOOLE_VERSION /usr/src/php/ext/swoole \
+    && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install swoole \
-
-    && docker-php-ext-install pdo_mysql mysqli pcntl gd\
-
+    && docker-php-ext-install pdo_mysql mysqli pcntl gd \
+    && docker-php-ext-install zip \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
-
-RUN apt-get install -y \
-        libzip-dev \
-        zip \
-  && docker-php-ext-configure zip --with-libzip \
-  && docker-php-ext-install zip
