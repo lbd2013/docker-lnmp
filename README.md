@@ -130,6 +130,11 @@ docker exec -it ngixn /bin/sh
 PID=$(docker inspect --format "{{ .State.Pid }}" container_id)
 # nsenter --target $PID --mount --uts --ipc --net --pid
 ```
+3. 进入php容器
+```
+docker exec -it containerId sh
+```
+一般进入容器使用的命令是``exec -it /bin/bash``,这里有点不一样
 
 ### PHP扩展安装
 1. 安装PHP官方源码包里的扩展(如：同时安装pdo_mysql mysqli pcntl gd四个个扩展)
