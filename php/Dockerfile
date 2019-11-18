@@ -30,7 +30,12 @@ RUN cd ~ \
     && mv swoole-src-$SWOOLE_VERSION /usr/src/php/ext/swoole \
     && docker-php-ext-install swoole \
 
-    && docker-php-ext-install pdo_mysql mysqli pcntl gd zip \
-    #laravel 1.4↑ need ext-zip
+    && docker-php-ext-install pdo_mysql mysqli pcntl gd\
 
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+
+RUN apt-get install -y \
+        libzip-dev \
+        zip \
+  && docker-php-ext-configure zip --with-libzip \
+  && docker-php-ext-install zip
