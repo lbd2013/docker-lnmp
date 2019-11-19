@@ -303,27 +303,31 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 	改为：
 	bind 0.0.0.0
 	```
+ 
 * 启动docker web服务时 虚拟机端口转发 外部无法访问 一般出现在yum update的时候（WARNING: IPv4 forwarding is disabled. Networking will not work.）或者宿主机可以访问，但外部无法访问
-```
-vi /etc/sysctl.conf
-或者
-vi /usr/lib/sysctl.d/00-system.conf
-添加如下代码：
-    net.ipv4.ip_forward=1
-
-重启network服务
-systemctl restart network
-
-查看是否修改成功
-sysctl net.ipv4.ip_forward
-
-如果返回为"net.ipv4.ip_forward = 1"则表示成功了
-```
+    
+	```
+	vi /etc/sysctl.conf
+	或者
+	vi /usr/lib/sysctl.d/00-system.conf
+	添加如下代码：
+		net.ipv4.ip_forward=1
+	
+	重启network服务
+	systemctl restart network
+	
+	查看是否修改成功
+	sysctl net.ipv4.ip_forward
+	
+	如果返回为"net.ipv4.ip_forward = 1"则表示成功了
+	```
+ 
 * 如果使用最新的MySQL8无法正常连接，由于最新版本的密码加密方式改变，导致无法远程连接。
-```
-# 修改密码加密方式
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
-```
+
+	```
+	# 修改密码加密方式
+	ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+	```
 
 
 ### 常用命令
