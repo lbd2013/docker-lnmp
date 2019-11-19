@@ -42,7 +42,7 @@
 # 下载安装
 curl -sSL https://get.docker.com/ | sh
 
-# centos8 安装异常信息：
+# centos8 会出现以下错误：
 Error: 
  Problem: package docker-ce-3:19.03.5-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
   - cannot install the best candidate for the job
@@ -54,6 +54,7 @@ Error:
   - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
 # 解决：
 yum -y install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+然后再执行 curl -sSL https://get.docker.com/ | sh
 
 # 设置开机自启
 sudo systemctl enable docker.service
@@ -99,6 +100,7 @@ docker_lnmp
 > 直接使用docker-compose一键制作镜像并启动容器
 
 ```
+yum install -y git
 git clone https://github.com/linbodong/docker-lnmp.git
 cd docker-lnmp
 chmod 777 ./redis/redis.log
@@ -106,7 +108,7 @@ chmod -R 777 ./redis/data
 docker-compose up -d
 ```
 
-###centos8 docker-compose up -d异常
+###centos8 执行命令docker-compose up -d 异常处理
 ```
 #1、无权限
 ERROR: Service 'php' failed to build: Get https://daocloud.io/v2/library/php/manifests/7.3-fpm-alpine: Get https://daohub-auth.daocloud.io/auth?scope=repository%3Alibrary%2Fphp%3Apull&service=daocloud.io: net/http: TLS handshake timeout
@@ -139,9 +141,9 @@ WARNING: Ignoring APKINDEX.00740ba1.tar.gz: No such file or directory
 02:37:14.156763 IP vultr.guest > 172.17.0.2: ICMP host 108.61.10.10.choopa.net unreachable - admin prohibited filter, leng
 由于centos8默认开启防火墙，需要先把防火墙关闭，或者开启白名单
 
-然后，删除旧镜像，重启docker，再重新执行即可
+然后，清理旧镜像，重启docker，再重新执行即可
 # sudo docker system prune -f -a
-# sudo systemcel restart docker
+# sudo systemctl restart docker
 # docker-compose up -d
 ```
 
@@ -152,7 +154,7 @@ WARNING: Ignoring APKINDEX.00740ba1.tar.gz: No such file or directory
 ### 测试
 使用docker ps查看容器启动状态,若全部正常启动了则
 通过访问127.0.0.1、127.0.0.1/index.php、127.0.0.1/db.php、127.0.0.1/redis.php 即可完成测试
-(若想使用https则请修改nginx下的dockerfile，和nginx.conf按提示去掉注释即可，灵需要在ssl文件夹中加入自己的证书文件，本项目自带的是空的，需要自己替换，保持文件名一致)
+(若想使用https则请修改nginx下的dockerfile，和nginx.conf按提示去掉注释即可，另需要在ssl文件夹中加入自己的证书文件，本项目自带的是空的，需要自己替换，保持文件名一致)
 
 
 ### 进入容器内部
