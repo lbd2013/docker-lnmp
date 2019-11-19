@@ -233,13 +233,14 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 	```
 * MYSQL连接失败问题
 在v2版本中是最新的MySQL8,而该版本的密码认证方式为Caching_sha2_password,而低版本的php和mysql可视化工具可能不支持,可通过phpinfo里的mysqlnd的Loaded plugins查看是否支持该认证方式,否则需要修改为原来的认证方式mysql_native_password:
-```
-select user,host,plugin,authentication_string from mysql.user;
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
-FLUSH PRIVILEGES;
-```
+		```
+		select user,host,plugin,authentication_string from mysql.user;
+		ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+		FLUSH PRIVILEGES;
+		```
 
 * 注意挂载目录的权限问题，不然容器成功启动几秒后立刻关闭，例：以下/data/run/mysql 目录没权限的情况下就会出现刚才那种情况
+
 		```
 		docker run --name mysql57 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysql:/var/run/mysqld -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.7
 		```
