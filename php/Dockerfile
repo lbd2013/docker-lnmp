@@ -2,6 +2,14 @@ FROM daocloud.io/library/php:7.3-fpm-alpine
 
 COPY config/php.ini /usr/local/etc/php
 
+#RUN apk add autoconf gcc \
+#    && wget https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
+#    && tar -zxvf 3.1.3.tar.gz \
+#    && cd phpredis-3.1.3 \
+#    && /usr/local/bin/phpize \
+#    && ./configure --with-php-config=/usr/local/bin/php-config \
+#    && make \
+#    && make install \
 
 ENV PHPREDIS_VERSION 5.0.2
 ENV SWOOLE_VERSION 4.4.2
@@ -13,9 +21,7 @@ RUN cd ~ \
     && mkdir -p /usr/src/php/ext \
     && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
-
     && apk add libstdc++ libpng-dev zip libzip-dev \
-    && cd ~ \
     && wget https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
     && tar -zxvf v$SWOOLE_VERSION.tar.gz \
     && mkdir -p /usr/src/php/ext \
