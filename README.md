@@ -69,32 +69,40 @@ chmod +x /usr/local/bin/docker-compose
 ### 目录结构
 
 ```
-docker_lnmp
-├── v2
+├── docker-compose.yml
+├── LICENSE
 ├── mysql
-│   └── Dockerfile
-│	└── my.cnf
+│   ├── Dockerfile
+│   └── my.cnf
 ├── nginx
-│   ├── Dockerfile
-│   ├── nginx.conf
-│   ├── log
-│   │   └── error.log
-│   └── www
-│       ├── index.html
-│       ├── index.php
-│       ├── db.php
-│       └── redis.php
+│   ├── cert
+│   ├── conf.d
+│   │   └── default.conf
+│   ├── Dockerfile
+│   ├── log
+│   │   └── error.log
+│   ├── nginx.conf
+│   └── www
+│       ├── db.php
+│       ├── index.html
+│       ├── index.php
+│       └── redis.php
 ├── php
-│   ├── Dockerfile
-│   ├── www.conf
-│   ├── php-fpm.conf
-│   ├── php.ini
-│   └── log
-│       └── php-fpm.log
-└── redis
-    └── Dockerfile
-    └── redis.conf
+│   ├── config
+│   │   ├── php-fpm.conf
+│   │   ├── php-fpm.d
+│   │   │   ├── docker.conf
+│   │   │   ├── www.conf
+│   │   │   ├── www.conf.default
+│   │   │   └── zz-docker.conf
+│   │   └── php.ini
+│   └── Dockerfile
+├── redis
+│   ├── Dockerfile
+│   ├── redis.conf
 ```
+
+
 
 ### 创建镜像与安装
 > 直接使用docker-compose一键制作镜像并启动容器
@@ -224,6 +232,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 ```
 
 ## 常见问题处理
+*使用docker的php容器作为php命令
+正常在linux下使用php命令只需要执行 php test.php,使用docker构建lnmp之后，php环境在docker当中。这对于日常开发来说并不方便，
+Alias 为命令起一个别名，如：
+	```
+	alias php='docker exec php php' 
+	```
+
 * redis启动失败问题
 在v2版本中redis的启动用户为redis不是root,所以在宿主机中挂载的./redis/redis.log和./redis/data需要有写入权限。
 
@@ -231,6 +246,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 	chmod 777 ./redis/redis.log
 	chmod 777 ./redis/data
 	```
+ 
 * MYSQL连接失败问题
 在v2版本中是最新的MySQL8,而该版本的密码认证方式为Caching_sha2_password,而低版本的php和mysql可视化工具可能不支持,可通过phpinfo里的mysqlnd的Loaded plugins查看是否支持该认证方式,否则需要修改为原来的认证方式mysql_native_password:
 
