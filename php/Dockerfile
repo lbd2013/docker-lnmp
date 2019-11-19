@@ -15,6 +15,9 @@ ENV PHPREDIS_VERSION 5.0.2
 ENV SWOOLE_VERSION 4.4.2
 
 RUN cd ~ \
+    && apk update \
+    && apk add ca-certificates \
+    && update-ca-certificates \ 
     && adduser -s /bin/bash git -D -H \
     && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
     && tar -zxvf $PHPREDIS_VERSION.tar.gz \

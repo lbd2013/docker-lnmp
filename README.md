@@ -122,12 +122,41 @@ chmod -R 777 ./redis/data
 docker-compose up -d
 ```
 
+###centos8 docker-compose up -d异常
 ```
-#执行docker-compose up -d 异常信息：
+#1、无权限
 ERROR: Service 'php' failed to build: Get https://daocloud.io/v2/library/php/manifests/7.3-fpm-alpine: Get https://daohub-auth.daocloud.io/auth?scope=repository%3Alibrary%2Fphp%3Apull&service=daocloud.io: net/http: TLS handshake timeout
+可能是被风控了
 
 解决方法：
 docker login
+
+#2、wget bad request
+类似问题：https://github.com/Yelp/dumb-init/issues/73
+
+解决方法：
+# apk update
+# apk add ca-certificates
+# update-ca-certificates
+
+#3、temporary error
+ERROR: http://dl-cdn.alpinelinux.org/alpine/v3.10/main: temporary error (try again later)
+WARNING: Ignoring APKINDEX.00740ba1.tar.gz: No such file or directory
+无法获取alpine镜像
+
+解决方法：
+# systemctl stop firewalld
+
+# 原因：通过tcpdump -i docker0 查看通往nl.alpinelinux.org的链接是否被filter了，如下：
+# 02:37:11.653917 IP vultr.guest > 172.17.0.2: ICMP host 108.61.10.10.choopa.net unreachable - admin prohibited filter, length 72
+# 02:37:11.653935 IP 172.17.0.2.32875 > 108.61.10.10.choopa.net.domain: 64713+ AAAA? nl.alpinelinux.org. (36)
+# 02:37:11.653944 IP vultr.guest > 172.17.0.2: ICMP host 108.61.10.10.choopa.net unreachable - admin prohibited filter, length 72
+# 02:37:14.156694 IP 172.17.0.2.32875 > 108.61.10.10.choopa.net.domain: 64450+ A? nl.alpinelinux.org. (36)
+# 02:37:14.156763 IP vultr.guest > 172.17.0.2: ICMP host 108.61.10.10.choopa.net unreachable - admin prohibited filter, leng
+# 由于centos8默认开启防火墙，需要先把防火墙关闭，或者开启白名单
+
+然后，删除旧镜像，避免旧镜像影响：
+# sudo docker system prune -f -a
 
 ```
 
