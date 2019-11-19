@@ -33,4 +33,5 @@ RUN cd ~ \
     && docker-php-ext-install swoole \
     && docker-php-ext-install pdo_mysql mysqli pcntl gd \
     && docker-php-ext-install zip \
+    && docker-php-ext-install bcmath \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
