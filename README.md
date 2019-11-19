@@ -228,36 +228,35 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 在v2版本中redis的启动用户为redis不是root,所以在宿主机中挂载的./redis/redis.log和./redis/data需要有写入权限。
 
 	```
-	   chmod 777 ./redis/redis.log
-	   chmod 777 ./redis/data
+	chmod 777 ./redis/redis.log
+	chmod 777 ./redis/data
 	```
 * MYSQL连接失败问题
 在v2版本中是最新的MySQL8,而该版本的密码认证方式为Caching_sha2_password,而低版本的php和mysql可视化工具可能不支持,可通过phpinfo里的mysqlnd的Loaded plugins查看是否支持该认证方式,否则需要修改为原来的认证方式mysql_native_password:
 
 	```
-		select user,host,plugin,authentication_string from mysql.user;
-		ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
-		FLUSH PRIVILEGES;
+	select user,host,plugin,authentication_string from mysql.user;
+	ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+	FLUSH PRIVILEGES;
 	```
 
 * 注意挂载目录的权限问题，不然容器成功启动几秒后立刻关闭，例：以下/data/run/mysql 目录没权限的情况下就会出现刚才那种情况
 
 	```
-		docker run --name mysql57 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysql:/var/run/mysqld -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.7
+	docker run --name mysql57 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysql:/var/run/mysqld -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.7
 	```
 
 * 需要注意php.ini 中的目录对应  mysql 的配置的目录需要挂载才能获取文件内容，不然php连接mysql失败
 
 	```
-		# php.ini
-		mysql.default_socket = /data/run/mysql/mysqld.sock
-		mysqli.default_socket = /data/run/mysql/mysqld.sock
-		pdo_mysql.default_socket = /data/run/mysql/mysqld.sock
-		
-		# mysqld.cnf
-		pid-file       = /var/run/mysqld/mysqld.pid
-		socket         = /var/run/mysqld/mysqld.sock
-		
+	# php.ini
+	mysql.default_socket = /data/run/mysql/mysqld.sock
+	mysqli.default_socket = /data/run/mysql/mysqld.sock
+	pdo_mysql.default_socket = /data/run/mysql/mysqld.sock
+	
+	# mysqld.cnf
+	pid-file       = /var/run/mysqld/mysqld.pid
+	socket         = /var/run/mysqld/mysqld.sock
 	```
 
 * 使用php连接不上redis 
@@ -265,7 +264,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 	# 错误的
 	$redis = new Redis;
 	$rs = $redis->connect('127.0.0.1', 6379);
-	
 	```
 	
 	php连接不上，查看错误日志
