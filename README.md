@@ -52,6 +52,23 @@ curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compos
 chmod +x /usr/local/bin/docker-compose
 ```
 
+```
+#centos8 安装异常信息：
+Error: 
+ Problem: package docker-ce-3:19.03.5-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
+  - cannot install the best candidate for the job
+  - package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
+  - package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
+  - package containerd.io-1.2.2-3.el7.x86_64 is excluded
+  - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
+  - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
+  - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
+
+
+#解决：
+yum -y install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+```
+
 ### 目录结构
 
 ```
@@ -88,7 +105,7 @@ docker_lnmp
 **版本一(v1)**
 
 ```
-git clone https://github.com/voocel/docker-lnmp.git
+git clone https://github.com/linbodong/docker-lnmp.git
 cd docker-lnmp/v1
 docker-compose up -d
 ```
@@ -98,12 +115,22 @@ docker-compose up -d
 
 **当前版本(推荐)**
 ```
-git clone https://github.com/voocel/docker-lnmp.git
+git clone https://github.com/linbodong/docker-lnmp.git
 cd docker-lnmp
 chmod 777 ./redis/redis.log
 chmod -R 777 ./redis/data
 docker-compose up -d
 ```
+
+```
+#执行docker-compose up -d 异常信息：
+ERROR: Service 'php' failed to build: Get https://daocloud.io/v2/library/php/manifests/7.3-fpm-alpine: Get https://daohub-auth.daocloud.io/auth?scope=repository%3Alibrary%2Fphp%3Apull&service=daocloud.io: net/http: TLS handshake timeout
+
+解决方法：
+docker login
+
+```
+
 *站点根目录为 docker-lnmp/www*
 
 *该版本是通过拉取官方已经制作好的各个服务的镜像，再通过Dockerfile相关命令根据自身需求做相应的调整。所以该方式构建迅速使用方便，因为是基于Alpine Linux所以占用空间很小。*
