@@ -70,7 +70,6 @@ chmod +x /usr/local/bin/docker-compose
 
 ```
 ├── docker-compose.yml
-├── LICENSE
 ├── mysql
 │   ├── Dockerfile
 │   └── my.cnf
