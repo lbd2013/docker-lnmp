@@ -42,6 +42,7 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/my.cnf:/etc/my.cnf
+      - ./mysql:/var/log/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     networks:
