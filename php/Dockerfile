@@ -34,4 +34,6 @@ RUN cd ~ \
     && docker-php-ext-install pdo_mysql mysqli pcntl gd \
     && docker-php-ext-install zip \
     && docker-php-ext-install bcmath \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
+    && mkdir -p /var/log/php \
+    && chmod -R 777 /var/log/php
