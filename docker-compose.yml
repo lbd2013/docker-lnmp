@@ -26,6 +26,7 @@ services:
       - ./php/config/php-fpm.conf:/usr/local/etc/php-fpm.conf
       - ./php/config/php-fpm.d:/usr/local/etc/php-fpm.d
       - ./log/php:/var/log/php
+      - ./log/php/php-fpm.error.log:/var/log/php/php-fpm.error.log
     networks:
       - frontend
       - backend  
