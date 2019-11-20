@@ -148,6 +148,14 @@ WARNING: Ignoring APKINDEX.00740ba1.tar.gz: No such file or directory
 # sudo docker system prune -f -a
 # sudo systemctl restart docker
 # docker-compose up -d
+
+# 4、网络问题
+出现：ERROR: Service 'php' failed to build: Get https://daocloud.io/v2/: net/http: TLS handshake timeout
+
+解决方法：
+配置daocloud加速器
+http://guide.daocloud.io/dcs/docker-9153151.html
+
 ```
 
 *站点根目录为 docker-lnmp/www*

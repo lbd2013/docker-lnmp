@@ -12,8 +12,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/cert:/etc/nginx/cert
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./log/nginx/access.log:/var/log/nginx/access.log
-      - ./log/nginx/error.log:/var/log/nginx/error.log
+      - ./log/nginx:/var/log/nginx
     networks:
       - frontend
     restart: always
@@ -26,6 +25,7 @@ services:
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
       - ./php/config/php-fpm.conf:/usr/local/etc/php-fpm.conf
       - ./php/config/php-fpm.d:/usr/local/etc/php-fpm.d
+      - ./log/php:/var/log/php
     networks:
       - frontend
       - backend  
