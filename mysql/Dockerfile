@@ -1,5 +1,7 @@
 FROM daocloud.io/library/mysql:latest
 
+USER root
+
 #设置免密登录
 ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
 
