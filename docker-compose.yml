@@ -58,7 +58,7 @@ services:
     volumes:
       - ./redis/redis.conf/:/usr/local/etc/redis.conf
       - ./redis/data:/usr/local/redis/data
-      - ./log/redis/redis.log:/usr/local/redis/redis.log
+      - ./log/redis:/var/log/redis
     networks:
       - backend
     restart: always
