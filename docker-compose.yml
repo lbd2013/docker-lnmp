@@ -15,13 +15,15 @@ services:
       - ./log/nginx:/var/log/nginx
     networks:
       - frontend
+    environment:
+      TZ: Asia/Shanghai
     restart: always
     container_name: nginx
 
   php:
     build: ./php
     volumes:
-      - ./nginx/www:/var/www/html
+      - ./www:/var/www/html
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
       - ./php/config/php-fpm.conf:/usr/local/etc/php-fpm.conf
       - ./php/config/php-fpm.d:/usr/local/etc/php-fpm.d
@@ -29,7 +31,9 @@ services:
       - ./log/php/php-fpm.error.log:/var/log/php/php-fpm.error.log
     networks:
       - frontend
-      - backend  
+      - backend
+    environment:
+      TZ: Asia/Shanghai
     restart: always
     container_name: php
     cap_add:
@@ -48,6 +52,7 @@ services:
       - ./log/mysql/mysql_slow.log:/var/log/mysql/mysql_slow.log
     environment:
       MYSQL_ROOT_PASSWORD: 123456
+      TZ: Asia/Shanghai
     networks:
       - backend
     restart: always
@@ -63,6 +68,8 @@ services:
       - ./log/redis/redis.log:/var/log/redis/redis.log
     networks:
       - backend
+    environment:
+      TZ: Asia/Shanghai
     restart: always
     container_name: redis
 
@@ -73,6 +80,7 @@ services:
       - 8080:80
     environment:
       PMA_HOST: mysql
+      TZ: Asia/Shanghai
     networks:
       - backend
 
