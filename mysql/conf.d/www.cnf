@@ -27,9 +27,6 @@
 # http://dev.mysql.com/doc/mysql/en/server-system-variables.html
 
 [mysql]
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
-
 # Recommended in standard MySQL setup
 sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
 default-storage-engine=INNODB

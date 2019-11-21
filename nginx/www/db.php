@@ -15,6 +15,15 @@ try{
   if($con->connect_error){
       die("connect fail".$con->connect_error);
   }else{
+      $result = $con->query('select user from mysql.user;');
+      if ($result->num_rows > 0) {
+          // output data of each row
+          while($row = $result->fetch_assoc()) {
+              var_dump($row);
+          }
+      } else {
+          echo "0 results";
+      }
       echo "connect success!";
   }
 
