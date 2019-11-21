@@ -43,7 +43,9 @@ services:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/my.cnf:/etc/mysql/my.cnf
       - ./mysql/conf.d/www.cnf:/etc/mysql/conf.d/www.cnf
-      - ./log/mysql:/var/log/mysql
+      - ./log/mysql/mysql_error.log:/var/log/mysql/mysql_error.log
+      - ./log/mysql/mysql_general.log:/var/log/mysql/mysql_general.log
+      - ./log/mysql/mysql_slow.log:/var/log/mysql/mysql_slow.log
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     networks:
@@ -58,7 +60,7 @@ services:
     volumes:
       - ./redis/redis.conf/:/usr/local/etc/redis.conf
       - ./redis/data:/usr/local/redis/data
-      - ./log/redis:/var/log/redis
+      - ./log/redis/redis.log:/var/log/redis/redis.log
     networks:
       - backend
     restart: always
