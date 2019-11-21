@@ -10,7 +10,7 @@ set -e
 #echo `service mysql status`
 
 echo '2.修改类型'
-mysql < /mysql/init.sql
+mysql < /usr/mysql/init.sql
 
 #sleep 3
 #echo `service mysql status`
