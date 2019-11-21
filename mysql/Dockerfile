@@ -1,15 +1,7 @@
 FROM daocloud.io/library/mysql:latest
+USER root
 
-#USER root
-#
-##定义工作目录
-#ENV WORK_PATH /usr/mysq
-#
-##定义sql文件名
-#ENV FILE_0 init.sql
-#
-##将文件拷贝到容器中
-#CMD [ "sh", "-c", "touch /usr/mysql" ]
-#COPY setup.sh /usr/mysql/setup.sh
-#COPY init.sql /usr/mysql/init.sql
-#CMD [ "sh", "-c", "chmod -R 777 /usr/mysql && /usr/mysql/setup.sh" ]
+# 复制数据库初始化脚本create_table.sql到/docker-entrypoint-initdb.d文件夹下
+# mysql官方镜像中提供了容器启动时自动执行/docker-entrypoint-initdb.d文件夹下的脚本的功能(包括shell脚本和sql脚本)
+COPY init.sql /docker-entrypoint-initdb.d/init.sql
+CMD [ "sh", "-c", "chmod -R 777 /docker-entrypoint-initdb.d" ]
