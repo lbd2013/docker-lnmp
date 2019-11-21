@@ -1,5 +1,2 @@
 *
 !.gitignore
-!mysql_error.log
-!mysql_general.log
-!mysql_slow.log
