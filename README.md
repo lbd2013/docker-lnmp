@@ -66,7 +66,6 @@ chmod +x /usr/local/bin/docker-compose
 
 ```
 ├── docker-compose.yml
-├── LICENSE
 ├── log
 │   ├── mysql
 │   │   ├── mysql_error.log
