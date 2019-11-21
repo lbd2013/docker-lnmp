@@ -13,9 +13,13 @@ COPY config/php.ini /usr/local/etc/php
 
 ENV PHPREDIS_VERSION 5.0.2
 ENV SWOOLE_VERSION 4.4.2
+ENV TZ=Asia/Shanghai
 
 RUN cd ~ \
     && apk update \
+    && apk add tzdata \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo $TZ > /etc/timezone \
     && apk add ca-certificates \
     && update-ca-certificates \
     && adduser -s /bin/bash git -D -H \

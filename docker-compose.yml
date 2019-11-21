@@ -15,8 +15,6 @@ services:
       - ./log/nginx:/var/log/nginx
     networks:
       - frontend
-    environment:
-      - TZ=Asia/Shanghai
     restart: always
     container_name: nginx
 
@@ -32,8 +30,6 @@ services:
     networks:
       - frontend
       - backend
-    environment:
-      - TZ=Asia/Shanghai
     restart: always
     container_name: php
     cap_add:
