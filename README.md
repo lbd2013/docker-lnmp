@@ -106,7 +106,7 @@ chmod +x /usr/local/bin/docker-compose
 yum install -y git
 git clone https://github.com/linbodong/docker-lnmp.git
 cd docker-lnmp
-chmod 777 ./redis/redis.log
+chmod -R 777 ./log
 chmod -R 777 ./redis/data
 docker-compose up -d
 ```
