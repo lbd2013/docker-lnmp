@@ -14,7 +14,6 @@ COPY config/php.ini /usr/local/etc/php
 ENV PHPREDIS_VERSION 5.0.2
 ENV SWOOLE_VERSION 4.4.2
 ENV TZ=Asia/Shanghai
-
 RUN cd ~ \
     && apk update \
     && apk add tzdata \
