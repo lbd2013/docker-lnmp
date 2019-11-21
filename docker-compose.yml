@@ -78,6 +78,7 @@ services:
         - TZ=Asia/Shanghai
     networks:
       - backend
+    container_name: phpmyadmin
 
 networks:
   frontend:
