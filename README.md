@@ -73,12 +73,7 @@ chmod +x /usr/local/bin/docker-compose
 │   │   ├── mysql_general.log
 │   │   └── mysql_slow.log
 │   ├── nginx
-│   │   ├── access.log
-│   │   └── error.log
 │   ├── php
-│   │   ├── php-fpm.access.log
-│   │   ├── php-fpm.error.log
-│   │   └── php-fpm.slow.log
 │   └── redis
 │       └── redis.log
 ├── mysql
@@ -103,7 +98,6 @@ chmod +x /usr/local/bin/docker-compose
 │   │   │   └── zz-docker.conf
 │   │   └── php.ini
 │   └── Dockerfile
-├── README.md
 ├── redis
 │   ├── Dockerfile
 │   └── redis.conf
