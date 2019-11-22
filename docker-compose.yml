@@ -87,8 +87,6 @@ services:
       - "11211:11211"
     networks:
       - backend
-    environment:
-      - TZ=Asia/Shanghai
 
 networks:
   frontend:
