@@ -1,9 +1,10 @@
 FROM daocloud.io/library/php:7.3-fpm-alpine
 COPY config/php.ini /usr/local/etc/php
 
-ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev git
-ENV PHPREDIS_VERSION 5.0.2
-ENV SWOOLE_VERSION 4.4.2
+ENV MEMCACHED_DEPS libmemcached-libs zlib zlib-dev libmemcached-dev cyrus-sasl-dev
+ENV PHPREDIS_VERSION master
+ENV SWOOLE_VERSION master
+ENV MEMCACHED_VERSION master
 ENV TZ=Asia/Shanghai
 RUN cd ~ \
     && apk update \
@@ -11,9 +12,10 @@ RUN cd ~ \
     #时区设置
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo $TZ > /etc/timezone \
-    #基础库 git zip等
+    #
     && adduser -s /bin/bash git -D -H \
     && apk add libstdc++ libpng-dev zip libzip-dev \
+    && mkdir -p /usr/src/php/ext \
     #cert设置
     && apk add ca-certificates \
     && update-ca-certificates \
@@ -23,24 +25,29 @@ RUN cd ~ \
     && docker-php-ext-install pdo_mysql mysqli pcntl gd zip bcmath
 RUN cd ~ \
     #php redis扩展
-    && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
-    && tar -zxvf $PHPREDIS_VERSION.tar.gz \
-    && mkdir -p /usr/src/php/ext \
-    && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
-    && docker-php-ext-install redis
+    && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz  -O php-redis.tar.gz \
+    && mkdir ./php-redis && tar -xzvf php-redis.tar.gz -C ./php-redis --strip-components 1 \
+    && mv php-redis /usr/src/php/ext/redis \
+    && docker-php-ext-install redis \
+    && rm -rf ./php-redis \
+    && rm -rf /usr/src/php/ext/redis \
 RUN cd ~ \
     #php swoole扩展
-    && wget https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
-    && tar -zxvf v$SWOOLE_VERSION.tar.gz \
-    && mv swoole-src-$SWOOLE_VERSION /usr/src/php/ext/swoole \
+    && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz -O php-swoole.tar.gz \
+    && mkdir ./php-swoole && tar -xzvf php-swoole.tar.gz -C ./php-swoole --strip-components 1 \
+    && mv php-swoole /usr/src/php/ext/swoole \
     && docker-php-ext-configure zip --with-libzip \
-    && docker-php-ext-install swoole
+    && docker-php-ext-install swoole \
+    && rm -rf ./php-swoole \
+    && rm -rf /usr/src/php/ext/swoole \
 RUN cd ~ \
     #php memcache扩展
     set -xe \
-    && apk add --no-cache --virtual .memcached-deps $MEMCACHED_DEPS \
-    && git clone -b php7 https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached \
-    && docker-php-ext-configure /usr/src/php/ext/memcached --disable-memcached-sasl \
+    && apk add --no-cache --update --virtual .memcached-deps $MEMCACHED_DEPS \
+    && wget https://github.com/php-memcached-dev/php-memcached/archive/$MEMCACHED_VERSION.tar.gz -O php-memcached.tar.gz \
+    && mkdir ./php-memcached && tar -xzvf php-memcached.tar.gz -C ./php-memcached --strip-components 1 \
+    && mv php-memcached /usr/src/php/ext/memcached \
     && docker-php-ext-install /usr/src/php/ext/memcached \
+    && rm -rf ./php-memcached \
     && rm -rf /usr/src/php/ext/memcached \
     && apk del .memcached-deps
