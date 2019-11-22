@@ -50,5 +50,5 @@ RUN cd ~ \
     && mv php-memcached /usr/src/php/ext/memcached \
     && docker-php-ext-install /usr/src/php/ext/memcached \
     && rm -rf ./php-memcached \
-    && rm -rf /usr/src/php/ext/memcached
+    && rm -rf /usr/src/php/ext/memcached \
     && apk del .build-deps
