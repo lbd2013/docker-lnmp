@@ -175,7 +175,7 @@ http://guide.daocloud.io/dcs/docker-9153151.html
 *该版本是通过拉取官方已经制作好的各个服务的镜像，再通过Dockerfile相关命令根据自身需求做相应的调整。所以该方式构建迅速使用方便，因为是基于Alpine Linux所以占用空间很小。*
 
 ### 测试
-使用docker ps查看容器启动状态,若全部正常启动了则
+使用docker ps -a 查看容器启动状态,若全部正常启动了则
 通过访问127.0.0.1、127.0.0.1/index.php、127.0.0.1/db.php、127.0.0.1/redis.php 即可完成测试
 (若想使用https则请修改nginx下的dockerfile，和nginx.conf按提示去掉注释即可，另需要在ssl文件夹中加入自己的证书文件，本项目自带的是空的，需要自己替换，保持文件名一致)
 
@@ -196,11 +196,15 @@ docker exec -it ngixn /bin/sh
 PID=$(docker inspect --format "{{ .State.Pid }}" container_id)
 # nsenter --target $PID --mount --uts --ipc --net --pid
 ```
-3. 进入php容器
+3. 进入php、nginx容器
 ```
 docker exec -it containerId sh
 ```
-一般进入容器使用的命令是``exec -it /bin/bash``,这里有点不一样
+4. 进入mysql容器
+```
+docker exec -it containerId /bin/bash
+```
+
 
 ### PHP扩展安装
 1. 安装PHP官方源码包里的扩展(如：同时安装pdo_mysql mysqli pcntl gd四个个扩展)
