@@ -17,13 +17,10 @@ RUN cd ~ \
     #cert设置
     && apk add ca-certificates \
     && update-ca-certificates \
-    #zip bcmath 扩展
-    && docker-php-ext-install zip \
-    && docker-php-ext-install bcmath \
     #php composer
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
-    #只需要普通安装的php扩展：pdo、mysqli、pcntl、gd
-    && docker-php-ext-install pdo_mysql mysqli pcntl gd
+    #只需要普通安装的php扩展：pdo、mysqli、pcntl、gd、zip、bcmath
+    && docker-php-ext-install pdo_mysql mysqli pcntl gd zip bcmath
 RUN cd ~ \
     #php redis扩展
     && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
