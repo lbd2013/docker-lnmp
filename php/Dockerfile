@@ -1,15 +1,5 @@
 FROM daocloud.io/library/php:7.3-fpm-alpine
-
 COPY config/php.ini /usr/local/etc/php
-
-#RUN apk add autoconf gcc \
-#    && wget https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
-#    && tar -zxvf 3.1.3.tar.gz \
-#    && cd phpredis-3.1.3 \
-#    && /usr/local/bin/phpize \
-#    && ./configure --with-php-config=/usr/local/bin/php-config \
-#    && make \
-#    && make install \
 
 ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
 ENV PHPREDIS_VERSION 5.0.2
