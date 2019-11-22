@@ -1,1 +1,1 @@
-FROM memcached:latest-alpine
+FROM memcached:alpine
