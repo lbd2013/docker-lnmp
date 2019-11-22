@@ -35,3 +35,12 @@ RUN cd ~ \
     && mv swoole-src-$SWOOLE_VERSION /usr/src/php/ext/swoole \
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install swoole
+RUN cd ~ \
+    #php memcache扩展
+    set -xe \
+    && apk add --no-cache --virtual .memcached-deps $MEMCACHED_DEPS \
+    && git clone -b php7 https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached \
+    && docker-php-ext-configure /usr/src/php/ext/memcached --disable-memcached-sasl \
+    && docker-php-ext-install /usr/src/php/ext/memcached \
+    && rm -rf /usr/src/php/ext/memcached \
+    && apk del .memcached-deps
