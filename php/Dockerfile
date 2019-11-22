@@ -1,7 +1,7 @@
 FROM daocloud.io/library/php:7.3-fpm-alpine
 COPY config/php.ini /usr/local/etc/php
 
-ENV MEMCACHED_DEPS libmemcached-libs zlib zlib-dev libmemcached-dev cyrus-sasl-dev
+ENV BUILD_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
 ENV PHPREDIS_VERSION master
 ENV SWOOLE_VERSION master
 ENV MEMCACHED_VERSION master
@@ -12,10 +12,9 @@ RUN cd ~ \
     #时区设置
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo $TZ > /etc/timezone \
-    #
+    #基础库 git zip等
     && adduser -s /bin/bash git -D -H \
     && apk add libstdc++ libpng-dev zip libzip-dev \
-    && mkdir -p /usr/src/php/ext \
     #cert设置
     && apk add ca-certificates \
     && update-ca-certificates \
@@ -25,12 +24,13 @@ RUN cd ~ \
     && docker-php-ext-install pdo_mysql mysqli pcntl gd zip bcmath
 RUN cd ~ \
     #php redis扩展
-    && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz  -O php-redis.tar.gz \
-    && mkdir ./php-redis && tar -xzvf php-redis.tar.gz -C ./php-redis --strip-components 1 \
-    && mv php-redis /usr/src/php/ext/redis \
+    && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz -O php-phpredis.tar.gz \
+    && mkdir ./php-phpredis && tar -xzvf php-phpredis.tar.gz -C ./php-phpredis --strip-components 1 \
+    && mkdir -p /usr/src/php/ext \
+    && mv php-phpredis /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
-    && rm -rf ./php-redis \
-    && rm -rf /usr/src/php/ext/redis \
+    && rm -rf ./php-phpredis \
+    && rm -rf /usr/src/php/ext/redis
 RUN cd ~ \
     #php swoole扩展
     && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz -O php-swoole.tar.gz \
@@ -39,15 +39,16 @@ RUN cd ~ \
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install swoole \
     && rm -rf ./php-swoole \
-    && rm -rf /usr/src/php/ext/swoole \
+    && rm -rf /usr/src/php/ext/swoole
 RUN cd ~ \
     #php memcache扩展
     set -xe \
-    && apk add --no-cache --update --virtual .memcached-deps $MEMCACHED_DEPS \
+    && apk add --no-cache --update libmemcached-libs zlib \
+    && apk add --no-cache --update --virtual .build-deps $BUILD_DEPS \
     && wget https://github.com/php-memcached-dev/php-memcached/archive/$MEMCACHED_VERSION.tar.gz -O php-memcached.tar.gz \
     && mkdir ./php-memcached && tar -xzvf php-memcached.tar.gz -C ./php-memcached --strip-components 1 \
     && mv php-memcached /usr/src/php/ext/memcached \
     && docker-php-ext-install /usr/src/php/ext/memcached \
     && rm -rf ./php-memcached \
-    && rm -rf /usr/src/php/ext/memcached \
-    && apk del .memcached-deps
+    && rm -rf /usr/src/php/ext/memcached
+    && apk del .build-deps
