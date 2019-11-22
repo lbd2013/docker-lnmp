@@ -1,7 +1,7 @@
 FROM daocloud.io/library/php:7.3-fpm-alpine
 COPY config/php.ini /usr/local/etc/php
 
-ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
+ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev git
 ENV PHPREDIS_VERSION 5.0.2
 ENV SWOOLE_VERSION 4.4.2
 ENV TZ=Asia/Shanghai
