@@ -80,6 +80,16 @@ services:
       - backend
     container_name: phpmyadmin
 
+  memcached:
+    build: ./memcached
+    container_name: memcached
+    networks:
+      - backend
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "11211:11211"
+
 networks:
   frontend:
   backend:
