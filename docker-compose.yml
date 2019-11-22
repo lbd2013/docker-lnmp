@@ -83,12 +83,14 @@ services:
   memcached:
     build: ./memcached
     container_name: memcached
+    ports:
+      - "11211:11211"
+    volumes:
+      - ./log/memcached/:/var/log/memcache
     networks:
       - backend
     environment:
       - TZ=Asia/Shanghai
-    ports:
-      - "11211:11211"
 
 networks:
   frontend:
