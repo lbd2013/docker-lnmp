@@ -1,1 +1,1 @@
-FROM daocloud.io/library/memcached:latest-alpine
+FROM memcached:latest-alpine
