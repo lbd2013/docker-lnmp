@@ -52,3 +52,7 @@ RUN cd ~ \
     && rm -rf ./php-memcached \
     && rm -rf /usr/src/php/ext/memcached \
     && apk del .build-deps
+RUN cd ~ \
+    #php mongo扩展
+    pecl install mongodb \
+    &&  echo "extension=mongo.so" > /usr/local/etc/php/conf.d/docker-php-ext-mongo.ini
