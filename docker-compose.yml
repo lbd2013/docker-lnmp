@@ -118,6 +118,8 @@ services:
       - ./beanstalkd/binlog:/tmp/beanstalkd_binlog
     ports:
       - "11300:11300"
+    networks:
+      - backend
 
   beanstalk_console:
     ## Optionally; you can use a ready image changing:
@@ -129,8 +131,8 @@ services:
       - 8081:80
     environment:
       - BEANSTALKD_HOST=beanstalkd
-    links:
-      - beanstalk_console
+    networks:
+      - backend
 networks:
   frontend:
   backend:
