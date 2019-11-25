@@ -95,7 +95,7 @@ services:
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_ROOT_PASSWORD: 1234567
     command:
       - '--config'
       - '/etc/mongod.conf'
