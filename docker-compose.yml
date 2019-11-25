@@ -126,7 +126,7 @@ services:
     ## * `build: .`
     ## into:
     ## * image: agaveapi/beanstalkd-console
-    build: beanstalk_console
+    build: ./beanstalk_console
     ports:
       - 8081:80
     environment:
