@@ -98,9 +98,9 @@ services:
       - '--config'
       - '/etc/mongod.conf'
     environment:
-      MONGODB_USER: "admin"
-      MONGODB_DATABASE: "sample"
-      MONGODB_PASS: "123456"
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=test
     ports:
       - "27017:27017"
     volumes:
