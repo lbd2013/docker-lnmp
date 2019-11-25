@@ -98,12 +98,9 @@ services:
       - '--config'
       - '/etc/mongod.conf'
     environment:
-      - AUTH=yes
-      - ADMIN_USER=admin
-      - ADMIN_PASS=admin123
-      - APPLICATION_DATABASE=sample
-      - APPLICATION_USER=aashrey
-      - APPLICATION_PASS=admin123
+      MONGODB_USER: "admin"
+      MONGODB_DATABASE: "sample"
+      MONGODB_PASS: "123456"
     ports:
       - "27017:27017"
     volumes:
