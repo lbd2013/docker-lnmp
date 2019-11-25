@@ -120,6 +120,7 @@ git clone https://github.com/linbodong/docker-lnmp.git
 cd docker-lnmp
 chmod -R 777 ./log
 chmod -R 777 ./redis/data
+chmod -R 777 ./mongod/data
 docker-compose up -d
 ```
 
