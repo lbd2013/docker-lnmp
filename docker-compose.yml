@@ -114,6 +114,10 @@ services:
     build: ./beanstalkd
     restart: always
     container_name: beanstalkd
+    volumes:
+      - ./log/beanstalkd/beanstalkd.log:/tmp/beanstalkd_binlog.log
+    ports:
+      - "11300:11300"
 networks:
   frontend:
   backend:
