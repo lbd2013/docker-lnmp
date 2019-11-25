@@ -1,2 +1,2 @@
 FROM mongo:latest
-USER mongodb
+USER root
