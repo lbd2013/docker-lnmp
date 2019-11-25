@@ -100,8 +100,8 @@ services:
       - '--auth'
       - '-f'
       - '/etc/mongo.conf'
-    volumes:
-      - ./mongo/etc/mongo.conf:/etc/mongo.conf
+#    volumes:
+#      - ./mongo/etc/mongo.conf:/etc/mongo.conf
     networks:
       - backend
     container_name: mongo
