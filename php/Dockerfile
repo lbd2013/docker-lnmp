@@ -33,16 +33,16 @@ RUN set -xe \
     && docker-php-ext-install redis \
     && rm -rf ./php-phpredis \
     && rm -rf /usr/src/php/ext/redis
-#RUN set -xe \
-#    cd ~ \
-#    #php swoole扩展
-#    && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz -O php-swoole.tar.gz \
-#    && mkdir ./php-swoole && tar -xzvf php-swoole.tar.gz -C ./php-swoole --strip-components 1 \
-#    && mv php-swoole /usr/src/php/ext/swoole \
-#    && docker-php-ext-configure zip --with-libzip \
-#    && docker-php-ext-install swoole \
-#    && rm -rf ./php-swoole \
-#    && rm -rf /usr/src/php/ext/swoole
+RUN set -xe \
+    cd ~ \
+    #php swoole扩展
+    && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz -O php-swoole.tar.gz \
+    && mkdir ./php-swoole && tar -xzvf php-swoole.tar.gz -C ./php-swoole --strip-components 1 \
+    && mv php-swoole /usr/src/php/ext/swoole \
+    && docker-php-ext-configure zip --with-libzip \
+    && docker-php-ext-install swoole \
+    && rm -rf ./php-swoole \
+    && rm -rf /usr/src/php/ext/swoole
 RUN set -xe \
     cd ~ \
     #php memcache扩展
@@ -57,6 +57,7 @@ RUN set -xe \
     && apk del .build-deps
 RUN set -xe \
     cd ~ \
+    #php mongo扩展
     && apk add --virtual build-dependencies build-base openssl-dev autoconf \
     && pecl install mongodb \
     && docker-php-ext-enable mongodb
