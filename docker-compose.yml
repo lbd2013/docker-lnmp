@@ -127,6 +127,8 @@ services:
     ## into:
     ## * image: agaveapi/beanstalkd-console
     build: ./beanstalk_console
+    restart: always
+    container_name: beanstalk_console
     ports:
       - 8081:80
     environment:
