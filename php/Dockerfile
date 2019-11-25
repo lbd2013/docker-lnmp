@@ -6,7 +6,8 @@ ENV PHPREDIS_VERSION master
 ENV SWOOLE_VERSION master
 ENV MEMCACHED_VERSION master
 ENV TZ=Asia/Shanghai
-RUN cd ~ \
+RUN set -xe \
+    cd ~ \
     && apk update \
     && apk add tzdata \
     #时区设置
@@ -22,7 +23,8 @@ RUN cd ~ \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     #只需要普通安装的php扩展：pdo、mysqli、pcntl、gd、zip、bcmath
     && docker-php-ext-install pdo_mysql mysqli pcntl gd zip bcmath
-RUN cd ~ \
+RUN set -xe \
+    cd ~ \
     #php redis扩展
     && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz -O php-phpredis.tar.gz \
     && mkdir ./php-phpredis && tar -xzvf php-phpredis.tar.gz -C ./php-phpredis --strip-components 1 \
@@ -31,18 +33,19 @@ RUN cd ~ \
     && docker-php-ext-install redis \
     && rm -rf ./php-phpredis \
     && rm -rf /usr/src/php/ext/redis
-RUN cd ~ \
-    #php swoole扩展
-    && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz -O php-swoole.tar.gz \
-    && mkdir ./php-swoole && tar -xzvf php-swoole.tar.gz -C ./php-swoole --strip-components 1 \
-    && mv php-swoole /usr/src/php/ext/swoole \
-    && docker-php-ext-configure zip --with-libzip \
-    && docker-php-ext-install swoole \
-    && rm -rf ./php-swoole \
-    && rm -rf /usr/src/php/ext/swoole
-RUN cd ~ \
+#RUN set -xe \
+#    cd ~ \
+#    #php swoole扩展
+#    && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz -O php-swoole.tar.gz \
+#    && mkdir ./php-swoole && tar -xzvf php-swoole.tar.gz -C ./php-swoole --strip-components 1 \
+#    && mv php-swoole /usr/src/php/ext/swoole \
+#    && docker-php-ext-configure zip --with-libzip \
+#    && docker-php-ext-install swoole \
+#    && rm -rf ./php-swoole \
+#    && rm -rf /usr/src/php/ext/swoole
+RUN set -xe \
+    cd ~ \
     #php memcache扩展
-    set -xe \
     && apk add --no-cache --update libmemcached-libs zlib \
     && apk add --no-cache --update --virtual .build-deps $BUILD_DEPS \
     && wget https://github.com/php-memcached-dev/php-memcached/archive/$MEMCACHED_VERSION.tar.gz -O php-memcached.tar.gz \
@@ -52,7 +55,8 @@ RUN cd ~ \
     && rm -rf ./php-memcached \
     && rm -rf /usr/src/php/ext/memcached \
     && apk del .build-deps
-RUN cd ~ \
-    #php mongo扩展
-    pecl install mongodb \
-    &&  echo "extension=mongo.so" > /usr/local/etc/php/conf.d/docker-php-ext-mongo.ini
+RUN set -xe \
+    cd ~ \
+    && apk add --virtual build-dependencies build-base openssl-dev autoconf \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb
