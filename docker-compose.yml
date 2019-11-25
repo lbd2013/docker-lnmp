@@ -94,6 +94,7 @@ services:
     build: ./mongod
     restart: always
     command:
+      - '--auth'
       - '--config'
       - '/etc/mongod.conf'
     environment:
