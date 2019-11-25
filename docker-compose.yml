@@ -118,6 +118,19 @@ services:
       - ./beanstalkd/binlog:/tmp/beanstalkd_binlog
     ports:
       - "11300:11300"
+
+  beanstalk_console:
+    ## Optionally; you can use a ready image changing:
+    ## * `build: .`
+    ## into:
+    ## * image: agaveapi/beanstalkd-console
+    build: beanstalk_console
+    ports:
+      - 8081:80
+    environment:
+      - BEANSTALKD_HOST=beanstalkd
+    links:
+      - beanstalk_console
 networks:
   frontend:
   backend:
