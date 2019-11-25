@@ -96,8 +96,12 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
+    command:
+      - '--auth'
+      - '-f'
+      - '/etc/mongo.conf'
     volumes:
-      - ./mongo/etc:/etc
+      - ./mongo/etc/mongo.conf:/etc/mongod.conf
     networks:
       - backend
     container_name: mongo
