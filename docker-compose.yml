@@ -93,14 +93,12 @@ services:
   mongod:
     build: ./mongod
     restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
     command:
-      - '--auth'
       - '--config'
       - '/etc/mongod.conf'
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=user
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=test
     ports:
       - "27017:27017"
     volumes:
