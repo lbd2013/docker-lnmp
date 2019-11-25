@@ -110,6 +110,9 @@ services:
       - backend
     container_name: mongod
 
+  beanstalkd:
+    build: ./mongod
+    restart: always
 networks:
   frontend:
   backend:

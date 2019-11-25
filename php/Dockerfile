@@ -7,7 +7,7 @@ ENV SWOOLE_VERSION master
 ENV MEMCACHED_VERSION master
 ENV TZ=Asia/Shanghai
 RUN set -xe \
-    cd ~ \
+    && cd ~ \
     && apk update \
     && apk add tzdata \
     #时区设置
@@ -24,7 +24,7 @@ RUN set -xe \
     #只需要普通安装的php扩展：pdo、mysqli、pcntl、gd、zip、bcmath
     && docker-php-ext-install pdo_mysql mysqli pcntl gd zip bcmath
 RUN set -xe \
-    cd ~ \
+    && cd ~ \
     #php redis扩展
     && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz -O php-phpredis.tar.gz \
     && mkdir ./php-phpredis && tar -xzvf php-phpredis.tar.gz -C ./php-phpredis --strip-components 1 \
@@ -34,7 +34,7 @@ RUN set -xe \
     && rm -rf ./php-phpredis \
     && rm -rf /usr/src/php/ext/redis
 RUN set -xe \
-    cd ~ \
+    && cd ~ \
     #php swoole扩展
     && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz -O php-swoole.tar.gz \
     && mkdir ./php-swoole && tar -xzvf php-swoole.tar.gz -C ./php-swoole --strip-components 1 \
@@ -44,7 +44,7 @@ RUN set -xe \
     && rm -rf ./php-swoole \
     && rm -rf /usr/src/php/ext/swoole
 RUN set -xe \
-    cd ~ \
+    && cd ~ \
     #php memcache扩展
     && apk add --no-cache --update libmemcached-libs zlib \
     && apk add --no-cache --update --virtual .build-deps $BUILD_DEPS \
@@ -56,7 +56,7 @@ RUN set -xe \
     && rm -rf /usr/src/php/ext/memcached \
     && apk del .build-deps
 RUN set -xe \
-    cd ~ \
+    && cd ~ \
     #php mongo扩展
     && apk add --virtual build-dependencies build-base openssl-dev autoconf \
     && pecl install mongodb \
