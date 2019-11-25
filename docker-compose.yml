@@ -90,12 +90,21 @@ services:
     networks:
       - backend
 
-  mongo:
+  mongod:
     build: ./mongod
     restart: always
     command:
       - '--config'
       - '/etc/mongod.conf'
+    environment:
+      - AUTH=yes
+      - ADMIN_USER=admin
+      - ADMIN_PASS=admin123
+      - APPLICATION_DATABASE=sample
+      - APPLICATION_USER=aashrey
+      - APPLICATION_PASS=admin123
+    ports:
+      - "27017:27017"
     volumes:
       - ./log/mongod/mongod.log:/var/log/mongodb/mongod.log
       - ./mongod/data:/var/lib/mongodb
