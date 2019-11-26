@@ -1,6 +1,7 @@
 <?php
-
 $redis = new Redis();
 $redis->connect('redis',6379);
-$redis->set('test','hello world!');
-echo $redis->get('test');
+$key = isset($_GET['key']) ? $_GET['key'] : 'test';
+$value = isset($_GET['value']) ? $_GET['value'] : 'hello world!';
+$redis->set($key, $value);
+echo $redis->get($key);

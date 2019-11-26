@@ -1,8 +1,4 @@
 # <center>使用Docker 部署 LNMP+Redis 环境 </center>
-[![GitHub issues](https://img.shields.io/github/issues/voocel/docker-lnmp.svg)](https://github.com/voocel/docker-lnmp/issues)
-[![GitHub stars](https://img.shields.io/github/stars/voocel/docker-lnmp.svg)](https://github.com/voocel/docker-lnmp/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/voocel/docker-lnmp.svg)](https://github.com/voocel/docker-lnmp/network)
-
 ### <font face="黑体">Docker 简介</font>
   Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。推荐内核版本3.8及以上
 
@@ -42,6 +38,20 @@
 # 下载安装
 curl -sSL https://get.docker.com/ | sh
 
+# centos8 会出现以下错误：
+Error: 
+ Problem: package docker-ce-3:19.03.5-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
+  - cannot install the best candidate for the job
+  - package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
+  - package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
+  - package containerd.io-1.2.2-3.el7.x86_64 is excluded
+  - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
+  - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
+  - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
+# 解决：
+yum -y install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+然后再执行 curl -sSL https://get.docker.com/ | sh
+
 # 设置开机自启
 sudo systemctl enable docker.service
 
@@ -55,63 +65,120 @@ chmod +x /usr/local/bin/docker-compose
 ### 目录结构
 
 ```
-docker_lnmp
-├── v2
+├── docker-compose.yml
+├── log
+│   ├── mysql
+│   │   ├── mysql_error.log
+│   │   ├── mysql_general.log
+│   │   └── mysql_slow.log
+│   ├── nginx
+│   ├── php
+│   └── redis
+│       └── redis.log
 ├── mysql
-│   └── Dockerfile
-│	└── my.cnf
+│   ├── conf.d
+│   │   └── www.cnf
+│   ├── Dockerfile
+│   ├── init.sql
+│   ├── my.cnf
 ├── nginx
-│   ├── Dockerfile
-│   ├── nginx.conf
-│   ├── log
-│   │   └── error.log
-│   └── www
-│       ├── index.html
-│       ├── index.php
-│       ├── db.php
-│       └── redis.php
+│   ├── cert
+│   ├── conf.d
+│   │   └── default.conf
+│   ├── Dockerfile
+│   └── nginx.conf
 ├── php
-│   ├── Dockerfile
-│   ├── www.conf
-│   ├── php-fpm.conf
-│   ├── php.ini
-│   └── log
-│       └── php-fpm.log
-└── redis
-    └── Dockerfile
-    └── redis.conf
+│   ├── config
+│   │   ├── php-fpm.conf
+│   │   ├── php-fpm.d
+│   │   │   ├── docker.conf
+│   │   │   ├── www.conf
+│   │   │   ├── www.conf.default
+│   │   │   └── zz-docker.conf
+│   │   └── php.ini
+│   └── Dockerfile
+├── redis
+│   ├── Dockerfile
+│   └── redis.conf
+└── www
+    ├── db.php
+    ├── error.php
+    ├── index.html
+    ├── index.php
+    ├── redis.php
+    └── slow.php
 ```
+
+
 
 ### 创建镜像与安装
 > 直接使用docker-compose一键制作镜像并启动容器
 
-**版本一(v1)**
-
 ```
-git clone https://github.com/voocel/docker-lnmp.git
-cd docker-lnmp/v1
-docker-compose up -d
-```
-
-*该版本是通过拉取纯净的CentOS镜像，通过Dockerfile相关命令进行源码编译安装各个服务。所以该方式很方便定制自己需要的镜像，但是占用空间大且构建慢。*
-
-
-**当前版本(推荐)**
-```
-git clone https://github.com/voocel/docker-lnmp.git
+yum install -y git
+git clone https://github.com/linbodong/docker-lnmp.git
 cd docker-lnmp
-chmod 777 ./redis/redis.log
+chmod -R 777 ./log
 chmod -R 777 ./redis/data
+chmod -R 777 ./mongod/data
 docker-compose up -d
 ```
+
+###centos8 执行命令docker-compose up -d 异常处理
+```
+#1、无权限
+ERROR: Service 'php' failed to build: Get https://daocloud.io/v2/library/php/manifests/7.3-fpm-alpine: Get https://daohub-auth.daocloud.io/auth?scope=repository%3Alibrary%2Fphp%3Apull&service=daocloud.io: net/http: TLS handshake timeout
+可能是被风控了
+
+解决方法：
+docker login
+
+#2、wget bad request
+类似问题：https://github.com/Yelp/dumb-init/issues/73
+
+解决方法：
+# apk update
+# apk add ca-certificates
+# update-ca-certificates
+
+#3、temporary error
+ERROR: http://dl-cdn.alpinelinux.org/alpine/v3.10/main: temporary error (try again later)
+WARNING: Ignoring APKINDEX.00740ba1.tar.gz: No such file or directory
+无法获取alpine镜像
+
+解决方法：
+# systemctl stop firewalld
+
+原因：通过tcpdump -i docker0 查看通往nl.alpinelinux.org的链接是否被filter了，如下：
+02:37:11.653917 IP vultr.guest > 172.17.0.2: ICMP host 108.61.10.10.choopa.net unreachable - admin prohibited filter, length 72
+02:37:11.653935 IP 172.17.0.2.32875 > 108.61.10.10.choopa.net.domain: 64713+ AAAA? nl.alpinelinux.org. (36)
+02:37:11.653944 IP vultr.guest > 172.17.0.2: ICMP host 108.61.10.10.choopa.net unreachable - admin prohibited filter, length 72
+02:37:14.156694 IP 172.17.0.2.32875 > 108.61.10.10.choopa.net.domain: 64450+ A? nl.alpinelinux.org. (36)
+02:37:14.156763 IP vultr.guest > 172.17.0.2: ICMP host 108.61.10.10.choopa.net unreachable - admin prohibited filter, leng
+由于centos8默认开启防火墙，需要先把防火墙关闭，或者开启白名单
+
+然后，清理旧镜像，重启docker，再重新执行即可
+# sudo docker system prune -f -a
+# sudo systemctl restart docker
+# docker-compose up -d
+
+# 4、网络问题
+出现：ERROR: Service 'php' failed to build: Get https://daocloud.io/v2/: net/http: TLS handshake timeout
+
+解决方法：
+配置daocloud加速器
+http://guide.daocloud.io/dcs/docker-9153151.html
+
+```
+
 *站点根目录为 docker-lnmp/www*
 
 *该版本是通过拉取官方已经制作好的各个服务的镜像，再通过Dockerfile相关命令根据自身需求做相应的调整。所以该方式构建迅速使用方便，因为是基于Alpine Linux所以占用空间很小。*
 
 ### 测试
-使用docker ps查看容器启动状态,若全部正常启动了则
+使用docker ps -a 查看容器启动状态,若全部正常启动了则
 通过访问127.0.0.1、127.0.0.1/index.php、127.0.0.1/db.php、127.0.0.1/redis.php 即可完成测试
-(若想使用https则请修改nginx下的dockerfile，和nginx.conf按提示去掉注释即可，灵需要在ssl文件夹中加入自己的证书文件，本项目自带的是空的，需要自己替换，保持文件名一致)
+(若想使用https则请修改nginx下的dockerfile，和nginx.conf按提示去掉注释即可，另需要在ssl文件夹中加入自己的证书文件，本项目自带的是空的，需要自己替换，保持文件名一致)
 
 
 ### 进入容器内部
@@ -130,6 +197,15 @@ docker exec -it ngixn /bin/sh
 PID=$(docker inspect --format "{{ .State.Pid }}" container_id)
 # nsenter --target $PID --mount --uts --ipc --net --pid
 ```
+3. 进入php、nginx容器
+```
+docker exec -it containerId sh
+```
+4. 进入mysql容器
+```
+docker exec -it containerId /bin/bash
+```
+
 
 ### PHP扩展安装
 1. 安装PHP官方源码包里的扩展(如：同时安装pdo_mysql mysqli pcntl gd四个个扩展)
@@ -176,44 +252,54 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 ```
 
 ## 常见问题处理
+*使用docker的php容器作为php命令
+正常在linux下使用php命令只需要执行 php test.php,使用docker构建lnmp之后，php环境在docker当中。这对于日常开发来说并不方便，
+Alias 为命令起一个别名，如：
+	```
+	alias php='docker exec php php' 
+	```
+
 * redis启动失败问题
 在v2版本中redis的启动用户为redis不是root,所以在宿主机中挂载的./redis/redis.log和./redis/data需要有写入权限。
 
 	```
-	   chmod 777 ./redis/redis.log
-	   chmod 777 ./redis/data
+	chmod 777 ./redis/redis.log
+	chmod 777 ./redis/data
 	```
+ 
 * MYSQL连接失败问题
 在v2版本中是最新的MySQL8,而该版本的密码认证方式为Caching_sha2_password,而低版本的php和mysql可视化工具可能不支持,可通过phpinfo里的mysqlnd的Loaded plugins查看是否支持该认证方式,否则需要修改为原来的认证方式mysql_native_password:
-select user,host,plugin,authentication_string from mysql.user;
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
-FLUSH PRIVILEGES;
+
+	```
+	select user,host,plugin,authentication_string from mysql.user;
+	ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+	FLUSH PRIVILEGES;
+	```
 
 * 注意挂载目录的权限问题，不然容器成功启动几秒后立刻关闭，例：以下/data/run/mysql 目录没权限的情况下就会出现刚才那种情况
-		```
-		docker run --name mysql57 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysql:/var/run/mysqld -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.7
-		```
+
+	```
+	docker run --name mysql57 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysql:/var/run/mysqld -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.7
+	```
 
 * 需要注意php.ini 中的目录对应  mysql 的配置的目录需要挂载才能获取文件内容，不然php连接mysql失败
 
-		```
-		# php.ini
-		mysql.default_socket = /data/run/mysql/mysqld.sock
-		mysqli.default_socket = /data/run/mysql/mysqld.sock
-		pdo_mysql.default_socket = /data/run/mysql/mysqld.sock
-		
-		# mysqld.cnf
-		pid-file       = /var/run/mysqld/mysqld.pid
-		socket         = /var/run/mysqld/mysqld.sock
-		
-		```
+	```
+	# php.ini
+	mysql.default_socket = /data/run/mysql/mysqld.sock
+	mysqli.default_socket = /data/run/mysql/mysqld.sock
+	pdo_mysql.default_socket = /data/run/mysql/mysqld.sock
+	
+	# mysqld.cnf
+	pid-file       = /var/run/mysqld/mysqld.pid
+	socket         = /var/run/mysqld/mysqld.sock
+	```
 
 * 使用php连接不上redis 
 	```
 	# 错误的
 	$redis = new Redis;
 	$rs = $redis->connect('127.0.0.1', 6379);
-	
 	```
 	
 	php连接不上，查看错误日志
@@ -253,27 +339,31 @@ FLUSH PRIVILEGES;
 	改为：
 	bind 0.0.0.0
 	```
+ 
 * 启动docker web服务时 虚拟机端口转发 外部无法访问 一般出现在yum update的时候（WARNING: IPv4 forwarding is disabled. Networking will not work.）或者宿主机可以访问，但外部无法访问
-```
-vi /etc/sysctl.conf
-或者
-vi /usr/lib/sysctl.d/00-system.conf
-添加如下代码：
-    net.ipv4.ip_forward=1
-
-重启network服务
-systemctl restart network
-
-查看是否修改成功
-sysctl net.ipv4.ip_forward
-
-如果返回为"net.ipv4.ip_forward = 1"则表示成功了
-```
+    
+	```
+	vi /etc/sysctl.conf
+	或者
+	vi /usr/lib/sysctl.d/00-system.conf
+	添加如下代码：
+		net.ipv4.ip_forward=1
+	
+	重启network服务
+	systemctl restart network
+	
+	查看是否修改成功
+	sysctl net.ipv4.ip_forward
+	
+	如果返回为"net.ipv4.ip_forward = 1"则表示成功了
+	```
+ 
 * 如果使用最新的MySQL8无法正常连接，由于最新版本的密码加密方式改变，导致无法远程连接。
-```
-# 修改密码加密方式
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
-```
+
+	```
+	# 修改密码加密方式
+	ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+	```
 
 
 ### 常用命令
