@@ -5,7 +5,7 @@
 
 
 // Hopefully you're using Composer autoloading.
-include_once "/root/docker-lnmp/www/beanstalkd/vendor/autoload.php";
+include_once "vendor/autoload.php";
 use Pheanstalk\Pheanstalk;
 
 // Create using autodetection of socket implementation
