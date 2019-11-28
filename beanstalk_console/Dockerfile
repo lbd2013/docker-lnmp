@@ -9,12 +9,12 @@ RUN docker-php-ext-install mbstring && \
 
 # Add custom default apache virutal host with combined error and access
 # logging to stdout
-ADD docker/apache_vhost  /etc/apache2/sites-available/000-default.conf
-ADD docker/php.ini /usr/local/etc/php
+ADD config/apache_vhost  /etc/apache2/sites-available/000-default.conf
+ADD config/php.ini /usr/local/etc/php
 
 # Add custom entrypoint to inject runtime environment variables into
 # beanstalk console config
-ADD docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+ADD config/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 CMD ["/usr/local/bin/docker-entrypoint"]
 
