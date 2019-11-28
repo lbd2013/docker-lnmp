@@ -3,7 +3,7 @@ $GLOBALS['config'] = array(
     /**
      * List of servers available for all users
      */
-    'servers' => array(/* 'Local Beanstalkd' => 'beanstalk://localhost:11300', ... */),
+    'servers' => array(BEANSTALKD_HOST),
     /**
      * Saved samples jobs are kept in this file, must be writable
      */
