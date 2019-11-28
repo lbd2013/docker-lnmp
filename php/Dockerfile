@@ -22,7 +22,7 @@ RUN set -xe \
     #php composer
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     #只需要普通安装的php扩展：pdo、mysqli、pcntl、gd、zip、bcmath
-    && docker-php-ext-install pdo_mysql mysqli pcntl gd zip bcmath
+    && docker-php-ext-install pdo_mysql mysqli pcntl gd zip bcmath ext-sockets
 #RUN set -xe \
 #    && cd ~ \
 #    #php redis扩展
