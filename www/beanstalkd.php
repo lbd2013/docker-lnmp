@@ -1,8 +1,10 @@
 <?php
+echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  </br>";
 echo "执行以下语句，安装beanstalk php库，（库 github地址 ：https://github.com/pheanstalk/pheanstalk）</br>";
 echo "docker exec php composer require pda/pheanstalk </br>";
-echo "//docker exec php composer update -vvv </br>";
-
+echo "//docker exec php composer update -vvv ";
+echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  </br>";
+echo "</br> </br> </br> </br> </br> </br> </br> </br> </br>";
 
 // Hopefully you're using Composer autoloading.
 include_once "vendor/autoload.php";
