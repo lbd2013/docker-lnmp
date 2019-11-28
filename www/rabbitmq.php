@@ -5,6 +5,7 @@ echo "官方hello word：https://www.rabbitmq.com/tutorials/tutorial-one-php.htm
 
 echo "docker exec php composer require php-amqplib/php-amqplib </br>";
 echo "docker exec php composer update -vvv ";
+echo "管理页面：your_host:15672";
 echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  </br>";
 echo "</br> </br> </br> </br> </br> </br> </br> </br> </br>";
 
@@ -13,7 +14,7 @@ echo "</br> </br> </br> </br> </br> </br> </br> </br> </br>";
 include_once "vendor/autoload.php";
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
-$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'root', '123456');
 $channel = $connection->channel();
 
 $channel->queue_declare('hello', false, false, false, false);
