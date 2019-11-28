@@ -11,6 +11,7 @@ RUN docker-php-ext-install mbstring && \
 # logging to stdout
 ADD config/apache_vhost  /etc/apache2/sites-available/000-default.conf
 ADD config/php.ini /usr/local/etc/php
+ADD config/config.php /var/www/config.php
 
 # Add custom entrypoint to inject runtime environment variables into
 # beanstalk console config
