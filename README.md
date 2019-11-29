@@ -121,6 +121,8 @@ cd docker-lnmp
 chmod -R 777 ./log
 chmod -R 777 ./redis/data
 chmod -R 777 ./mongod/data
+chmod -R 777 ./elk/elasticsearch/data
+chmod -R 777 ./elk/logstash/pipeline
 docker-compose up -d
 ```
 
