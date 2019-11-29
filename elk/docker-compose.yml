@@ -12,7 +12,7 @@ services:
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
       - type: volume
-        source: elasticsearch
+        source: ./elk/elasticsearch
         target: /usr/share/elasticsearch/data
     ports:
       - "9200:9200"
@@ -34,7 +34,7 @@ services:
         target: /usr/share/logstash/config/logstash.yml
         read_only: true
       - type: bind
-        source: ./logstash/pipeline
+        source: ./elk/logstash/pipeline
         target: /usr/share/logstash/pipeline
         read_only: true
     ports:
