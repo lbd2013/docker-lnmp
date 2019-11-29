@@ -59,7 +59,7 @@ services:
     container_name: filebeat
     volumes:
       - ./elk/filebeat/conf/filebeat.yml:/filebeat.yml
-      - ./log:/logs
+      - ./log:/logs:ro
       - ./elk/filebeat/registry:/etc/registry
     networks:
       - elk
