@@ -123,7 +123,7 @@ chmod -R 777 ./redis/data
 chmod -R 777 ./mongod/data
 chmod -R 777 ./elk/elasticsearch/data
 chmod -R 777 ./elk/logstash/pipeline
-docker-compose up -d
+docker-compose -f docker-compose.yml -f elk/docker-compose.yml up -d
 ```
 
 ###centos8 执行命令docker-compose up -d 异常处理
