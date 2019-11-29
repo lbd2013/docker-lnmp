@@ -24,4 +24,4 @@ filebeat:
   registry_file: /etc/registry/mark #记录日志读取位置，防止重启后重复读取
 output:
   logstash:
-hosts: ["logstash:5000"] #logstash的访问ip
+  hosts: ["logstash:5000"] #logstash的访问ip
