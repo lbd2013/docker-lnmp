@@ -69,7 +69,7 @@ services:
     container_name: redis
 
   myadmin:
-    image: phpmyadmin/phpmyadmin
+    build: ./phpmyadmin
     restart: always
     ports:
       - 8080:80
@@ -146,7 +146,7 @@ services:
       - backend
 
   cadvisor:
-    image: google/cadvisor:latest
+    image: ./cadvisor
     restart: always
     container_name: cadvisor
     ports:
