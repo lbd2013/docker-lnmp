@@ -3,7 +3,7 @@ version: '3.2'
 services:
   elasticsearch:
     build:
-      context: elasticsearch/
+      context: ./elk/elasticsearch/
       args:
         ELK_VERSION: latest
     volumes:
@@ -25,7 +25,7 @@ services:
 
   logstash:
     build:
-      context: logstash/
+      context: ./elk/logstash/
       args:
         ELK_VERSION: latest
     volumes:
@@ -49,7 +49,7 @@ services:
 
   kibana:
     build:
-      context: kibana/
+      context: ./elk/kibana/
       args:
         ELK_VERSION: latest
     volumes:
