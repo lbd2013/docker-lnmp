@@ -52,7 +52,7 @@ services:
 
   filebeat:
     build:
-      context: ./elk/filebeat
+      context: ./elk/filebeat/
       args:
         ELK_VERSION: 7.4.2
     restart: always
