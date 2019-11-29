@@ -2,7 +2,7 @@ filebeat:
   prospectors:
     - input_type: log
       paths:
-        - /log/nginx/.*log #日志文件地址
+        - /logs/nginx/.*log #日志文件地址
       fields:
         app_id: cpgl #应用名称
         type: nginx  #日志类型
@@ -11,7 +11,7 @@ filebeat:
 
     - input_type: log
       paths:
-        - /log/php/*.log #日志文件地址
+        - /logs/php/*.log #日志文件地址
       fields:
         app_id: educloud #应用名称
         type: php #日志类型
