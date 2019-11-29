@@ -7,13 +7,8 @@ services:
       args:
         ELK_VERSION: latest
     volumes:
-      - type: bind
-        source: ./elk/elasticsearch/config/elasticsearch.yml
-        target: /usr/share/elasticsearch/config/elasticsearch.yml
-        read_only: true
-      - type: volume
-        source: ./elk/elasticsearch
-        target: /usr/share/elasticsearch/data
+      - ./elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elk/elasticsearch:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -29,14 +24,8 @@ services:
       args:
         ELK_VERSION: latest
     volumes:
-      - type: bind
-        source: ./elk/logstash/config/logstash.yml
-        target: /usr/share/logstash/config/logstash.yml
-        read_only: true
-      - type: bind
-        source: ./elk/logstash/pipeline/data
-        target: /usr/share/logstash/pipeline
-        read_only: true
+      - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -53,10 +42,7 @@ services:
       args:
         ELK_VERSION: latest
     volumes:
-      - type: bind
-        source: ./elk/kibana/config/kibana.yml
-        target: /usr/share/kibana/config/kibana.yml
-        read_only: true
+      - ./elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
       - "5601:5601"
     networks:
@@ -67,6 +53,3 @@ services:
 networks:
   elk:
     driver: bridge
-
-volumes:
-  elasticsearch:
