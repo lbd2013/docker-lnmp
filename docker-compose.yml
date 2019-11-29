@@ -146,7 +146,7 @@ services:
       - backend
 
   cadvisor:
-    image: ./cadvisor
+    build: ./cadvisor
     restart: always
     container_name: cadvisor
     ports:
