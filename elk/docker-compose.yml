@@ -50,6 +50,22 @@ services:
     depends_on:
       - elasticsearch
 
+  filebeat:
+    build:
+      context: ./elk/filebeat
+      args:
+        ELK_VERSION: 7.4.2
+    restart: always
+    container_name: filebeat
+    volumes:
+      - ./elk/filebeat/conf/filebeat.yml:/filebeat.yml
+      - ./log:/log
+      - ./elk/filebeat/registry:/etc/registry
+    networks:
+      - elk
+    depends_on:
+      - logstash
+
 networks:
   elk:
     driver: bridge
