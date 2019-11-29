@@ -145,19 +145,20 @@ services:
     networks:
       - backend
 
-  #谷歌开源的docker容器监控工具
-  cadvisor：
+
+  cadvisor:
     image: google/cadvisor:latest
-    restart: always
-    container_name: cadvisor
-    ports:
-      - 8082:80
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
+      restart: always
+      container_name: cadvisor
+      ports:
+        - 8082:80
+      volumes:
+        - /:/rootfs:ro
+        - /var/run:/var/run:ro
+        - /sys:/sys:ro
+        - /var/lib/docker/:/var/lib/docker:ro
+        - /dev/disk/:/dev/disk:ro
+
 
 networks:
   frontend:
