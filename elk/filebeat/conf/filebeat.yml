@@ -34,7 +34,7 @@ filebeat.inputs:
 
 #----------------output.logstash-----------------------------
 output.logstash:
-  hosts: ["127.0.0.1:5000"]
+  hosts: ["47.244.12.24:5000"]
 
 #---------------output.kafka----------------------------------
 #output.kafka:
