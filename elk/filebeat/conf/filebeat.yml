@@ -7,15 +7,6 @@ filebeat.inputs:
     enabled: true
     # Paths that should be crawled and fetched. Glob based paths.
     paths:
-      - /logs/nginx/access.log
-    tags: ["nginx-access"]
-    fields_under_root: true
-
-  - type: log
-    # Change to true to enable this prospector configuration.
-    enabled: true
-    # Paths that should be crawled and fetched. Glob based paths.
-    paths:
       - /logs/nginx/error.log
     tags: ["nginx-error"]
     fields_under_root: true
