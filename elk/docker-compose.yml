@@ -55,6 +55,7 @@ services:
       context: ./elk/filebeat/
       args:
         ELK_VERSION: 7.4.2
+    user: root
     restart: always
     container_name: filebeat
     volumes:
