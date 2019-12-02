@@ -10,6 +10,7 @@ filebeat.inputs:
       - /logs/nginx/*
     tags: ["nginx"]
     fields_under_root: true
+    encoding: 'utf-8'
 
   - type: log
     enabled: true
@@ -17,6 +18,7 @@ filebeat.inputs:
       - /logs/php/*
     tags: ["php"]
     fields_under_root: true
+    encoding: 'utf-8'
 
 
 # ----------------output.kibana-------------------------
