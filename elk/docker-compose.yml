@@ -26,6 +26,7 @@ services:
     volumes:
       - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
+    container_name: logstash
     ports:
       - "5000:5000"
       - "9600:9600"
