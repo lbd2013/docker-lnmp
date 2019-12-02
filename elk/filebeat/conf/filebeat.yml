@@ -1,14 +1,15 @@
 #记录日志读取位置，防止重启后重复读取
 filebeat.registry.path: /etc/registry
+filebeat:
+  modules:
+    - nginx
+      access:
+        enabled: true
+        var.paths: ["/logs/nginx/access.log"]
+      error:
+        enabled: true
+        var.paths: ["/logs/nginx/error.log"]
 
-filebeat.module:
-  - module: nginx
-    access:
-      enabled: true
-      var.paths: ["/logs/nginx/access.log"]
-    error:
-      enabled: true
-      var.paths: ["/logs/nginx/error.log"]
 
 #filebeat.inputs:
 #  - type: log
