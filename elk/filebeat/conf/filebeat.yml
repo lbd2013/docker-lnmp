@@ -1,22 +1,31 @@
 #记录日志读取位置，防止重启后重复读取
 filebeat.registry.path: /etc/registry
 
-filebeat.inputs:
-  - type: log
-    # Change to true to enable this prospector configuration.
-    enabled: true
-    # Paths that should be crawled and fetched. Glob based paths.
-    paths:
-      - /logs/nginx/*
-    tags: ["nginx"]
-    fields_under_root: true
+filebeat.module:
+  - module: nginx
+    access:
+      enabled: true
+      var.paths: ["/logs/nginx/access.log"]
+    error:
+      enabled: true
+      var.paths: ["/logs/nginx/error.log"]
 
-  - type: log
-    enabled: true
-    paths:
-      - /logs/php/*
-    tags: ["php"]
-    fields_under_root: true
+#filebeat.inputs:
+#  - type: log
+#    # Change to true to enable this prospector configuration.
+#    enabled: true
+#    # Paths that should be crawled and fetched. Glob based paths.
+#    paths:
+#      - /logs/nginx/*
+#    tags: ["nginx"]
+#    fields_under_root: true
+#
+#  - type: log
+#    enabled: true
+#    paths:
+#      - /logs/php/*
+#    tags: ["php"]
+#    fields_under_root: true
 
 
 # ----------------output.kibana-------------------------
