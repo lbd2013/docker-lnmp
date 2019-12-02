@@ -1,5 +1,5 @@
 #记录日志读取位置，防止重启后重复读取
-filebeat.registry_file: /etc/registry
+filebeat.registry.path: /etc/registry
 
 filebeat.inputs:
   - type: log
