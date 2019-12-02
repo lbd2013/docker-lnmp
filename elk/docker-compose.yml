@@ -61,7 +61,6 @@ services:
       - ./elk/filebeat/conf/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./log:/logs:ro
       - ./elk/filebeat/registry:/etc/registry:rw
-    privileged: true
     networks:
       - elk
     depends_on:
