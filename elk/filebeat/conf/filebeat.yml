@@ -24,7 +24,7 @@ filebeat.inputs:
     fields_under_root: true
 
   - type: log
-    enabled: false
+    enabled: true
     paths:
       - /logs/php/php-fpm.error.log
     tags: ["php-error"]
