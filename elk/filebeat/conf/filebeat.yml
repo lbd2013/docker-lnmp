@@ -3,21 +3,38 @@ filebeat.registry.path: /etc/registry
 
 filebeat.inputs:
   - type: log
-    # Change to true to enable this prospector configuration.
     enabled: true
-    # Paths that should be crawled and fetched. Glob based paths.
     paths:
       - /logs/nginx/access.log
     tags: ["nginx-access"]
     fields_under_root: true
 
   - type: log
-    # Change to true to enable this prospector configuration.
     enabled: true
-    # Paths that should be crawled and fetched. Glob based paths.
     paths:
       - /logs/nginx/error.log
     tags: ["nginx-error"]
+    fields_under_root: true
+
+  - type: log
+    enabled: true
+    paths:
+      - /logs/php/php-fpm.access.log
+    tags: ["php-access"]
+    fields_under_root: true
+
+  - type: log
+    enabled: false
+    paths:
+      - /logs/php/php-fpm.error.log
+    tags: ["php-error"]
+    fields_under_root: true
+
+  - type: log
+    enabled: false
+    paths:
+      - /logs/php/php-fpm.slow.log
+    tags: ["php-slow"]
     fields_under_root: true
 
 
