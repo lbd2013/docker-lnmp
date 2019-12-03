@@ -1,0 +1,76 @@
+version: '3.2'
+
+services:
+  elasticsearch:
+    build:
+      context: ./elk/elasticsearch/
+      args:
+        ELK_VERSION: 7.4.2
+    volumes:
+      - ./elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elk/elasticsearch/data:/usr/share/elasticsearch/data
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+    networks:
+      - elk
+
+  logstash:
+    build:
+      context: ./elk/logstash/
+      args:
+        ELK_VERSION: 7.4.2
+    volumes:
+      - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
+    container_name: logstash
+    ports:
+      - "5000:5000"
+      - "5044:5044"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    build:
+      context: ./elk/kibana/
+      args:
+        ELK_VERSION: 7.4.2
+    volumes:
+      - ./elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    build:
+      context: ./elk/filebeat/
+      args:
+        ELK_VERSION: 7.4.2
+    user: root
+    restart: always
+    container_name: filebeat
+    volumes:
+      - ./elk/filebeat/conf/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./log:/logs:ro
+      - ./elk/filebeat/registry:/etc/registry:rw
+    networks:
+      - elk
+    depends_on:
+      - logstash
+
+networks:
+  elk:
+    driver: bridge

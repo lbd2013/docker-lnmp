@@ -1,0 +1,52 @@
+#记录日志读取位置，防止重启后重复读取
+filebeat.registry.path: /etc/registry
+
+filebeat.inputs:
+  - type: log
+    # Change to true to enable this prospector configuration.
+    enabled: true
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - /logs/nginx/access.log
+    tags: ["nginx-access"]
+    fields_under_root: true
+
+  - type: log
+    # Change to true to enable this prospector configuration.
+    enabled: true
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - /logs/nginx/error.log
+    tags: ["nginx-error"]
+    fields_under_root: true
+
+
+# ----------------output.kibana-------------------------
+#setup.kibana:
+#  host: "localhost:5601"
+
+# ----------------output.elasticsearch-------------------------
+#output.elasticsearch:
+#  hosts: ["localhost:9200"]
+#  protocol: "http"
+#  index: "stat_filebeat"
+#  # template.name: "stat_ilebeat"
+#  # template.path: "filebeat.template.json"
+#  # template.overwrite: false
+
+#----------------output.logstash-----------------------------
+output.logstash:
+  enabled: true
+  hosts: ["logstash:5044"]
+
+#---------------output.kafka----------------------------------
+#output.kafka:
+#  enabled: true
+#  hosts: ["192.168.10.1:9092","192.168.10.2:9092","192.168.10.3:9092"]
+#  topic: "liuzc_test"
+#  partition.round_robin:
+#    reachable_only: true
+#  worker: 2
+#  required_acks: 1
+#  compression: gzip
+#  max_message_bytes: 10000000

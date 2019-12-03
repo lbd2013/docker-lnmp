@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services:
   nginx:
     build: ./nginx
@@ -69,7 +69,7 @@ services:
     container_name: redis
 
   myadmin:
-    image: phpmyadmin/phpmyadmin
+    build: ./phpmyadmin
     restart: always
     ports:
       - 8080:80
@@ -122,10 +122,6 @@ services:
       - backend
 
   beanstalk_console:
-    ## Optionally; you can use a ready image changing:
-    ## * `build: .`
-    ## into:
-    ## * image: agaveapi/beanstalkd-console
     build: ./beanstalk_console
     restart: always
     container_name: beanstalk_console
@@ -135,6 +131,33 @@ services:
       - BEANSTALKD_HOST=beanstalkd
     networks:
       - backend
+
+  rabbitmq:
+    build: ./rabbitmq
+    restart: always
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=123456
+    networks:
+      - backend
+
+  cadvisor:
+    build: ./cadvisor
+    restart: always
+    container_name: cadvisor
+    ports:
+      - 8082:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+
 networks:
   frontend:
   backend:
