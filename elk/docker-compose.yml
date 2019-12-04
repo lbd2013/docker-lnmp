@@ -81,7 +81,7 @@ services:
     restart: always
     container_name: metricbeat
     volumes:
-      - ./elk/metricbeat/config/metricbeat.yml /usr/share/metricbeat/metricbeat.yml
+      - ./elk/metricbeat/config/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
       - /proc:/hostfs/proc:ro
       - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
       - /:/hostfs:ro
