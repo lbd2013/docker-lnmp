@@ -17,11 +17,11 @@ metricbeat.modules:
       by_cpu: 20
       by_memory: 20
     period: 10s
-    cpu.metrics:  ["percentages"]
-    core.metrics: ["percentages"]
+    cpu.metrics:  ["percentages","normalized_percentages"]
+    core.metrics: ["percentages","normalized_percentages"]
 
   - module: system
-    period: 1m
+    period: 10s
     metricsets:
       - filesystem
       - fsstat
