@@ -94,6 +94,8 @@ services:
       - ELASTICSEARCH_PASSWORD='changeme'
     networks:
       - elk
+    depends_on:
+      - kibana
 
 networks:
   elk:
