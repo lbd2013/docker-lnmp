@@ -51,7 +51,7 @@ processors:
 
 #========================== Elasticsearch output ===============================
 output.elasticsearch:
-  hosts: [${ELASTICSEARCH_HOST}]
+  hosts: ${ELASTICSEARCH_HOST}
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
 
