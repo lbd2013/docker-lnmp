@@ -38,8 +38,6 @@ metricbeat.modules:
   - module: docker
     metricsets: ["container", "cpu", "diskio", "healthcheck", "info", "memory", "network"]
     hosts: ["unix:///var/run/docker.sock"]
-    cpu.metrics:  ["normalized_percentages"]
-    core.metrics: ["normalized_percentages"]
     period: 10s
 
 #================================ Processors ===================================
