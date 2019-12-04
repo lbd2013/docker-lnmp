@@ -72,6 +72,29 @@ services:
     depends_on:
       - logstash
 
+  metricbeat:
+    build:
+      context: ./elk/metricbeat/
+      args:
+        ELK_VERSION: 7.4.2
+    user: root
+    restart: always
+    container_name: metricbeat
+    volumes:
+      - ./elk/metricbeat/config/metricbeat.yml /usr/share/metricbeat/metricbeat.yml
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./elk/metricbeat/data:/usr/share/metricbeat/data
+    environment:
+      - ELASTICSEARCH_HOST='elasticsearch:9200'
+      - KIBANA_HOST='elasticsearch:5601'
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=changeme
+    networks:
+      - elk
+
 networks:
   elk:
     driver: bridge
