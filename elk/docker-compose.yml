@@ -76,7 +76,7 @@ services:
     build:
       context: ./elk/metricbeat/
       args:
-        ELK_VERSION: 7.4.2
+        ELK_VERSION: 7.5.0
     user: root
     restart: always
     container_name: metricbeat
