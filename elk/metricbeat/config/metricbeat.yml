@@ -14,8 +14,8 @@ metricbeat.modules:
     metricsets: ["cpu", "load", "memory", "network", "process", "process_summary", "core", "diskio", "socket"]
     processes: ['.*']
     process.include_top_n:
-      by_cpu: 100
-      by_memory: 100
+      by_cpu: 20
+      by_memory: 20
     period: 10s
     cpu.metrics:  ["percentages"]
     core.metrics: ["percentages"]
