@@ -18,7 +18,7 @@ metricbeat.modules:
       by_memory: 20
     period: 10s
     cpu.metrics:  ["normalized_percentages"]
-    core.metrics: ["normalized_percentages"]
+    core.metrics: ["percentages"]
 
   - module: system
     period: 10s
