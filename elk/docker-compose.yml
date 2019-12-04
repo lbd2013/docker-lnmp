@@ -90,8 +90,8 @@ services:
     environment:
       - ELASTICSEARCH_HOST='elasticsearch:9200'
       - KIBANA_HOST='kibana:5601'
-      - ELASTICSEARCH_USERNAME=elastic
-      - ELASTICSEARCH_PASSWORD=changeme
+      - ELASTICSEARCH_USERNAME='elastic'
+      - ELASTICSEARCH_PASSWORD='changeme'
     networks:
       - elk
 
