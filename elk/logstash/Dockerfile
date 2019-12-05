@@ -5,5 +5,5 @@ FROM docker.elastic.co/logstash/logstash:${ELK_VERSION}
 
 # Add your logstash plugins setup here
 # Example: RUN logstash-plugin install logstash-filter-json
-ENV LS_JAVA_OPTS ${LS_JAVA_OPTS}
-RUN logstash-plugin install logstash-filter-multiline
+#ENV LS_JAVA_OPTS ${LS_JAVA_OPTS}
+#RUN logstash-plugin install logstash-filter-multiline

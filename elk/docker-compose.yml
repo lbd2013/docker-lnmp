@@ -24,7 +24,6 @@ services:
       context: ./elk/logstash/
       args:
         ELK_VERSION: 7.4.2
-        LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     volumes:
       - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
