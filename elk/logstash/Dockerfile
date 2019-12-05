@@ -5,4 +5,4 @@ FROM docker.elastic.co/logstash/logstash:${ELK_VERSION}
 
 # Add your logstash plugins setup here
 # Example: RUN logstash-plugin install logstash-filter-json
-CMD [ "sh", "-c", "logstash-plugin install logstash-filter-multiline" ]
+RUN logstash-plugin install logstash-filter-multiline
