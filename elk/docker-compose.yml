@@ -24,6 +24,7 @@ services:
       context: ./elk/logstash/
       args:
         ELK_VERSION: 7.4.2
+    user: root
     volumes:
       - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
