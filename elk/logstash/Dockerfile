@@ -1,10 +1,9 @@
 ARG ELK_VERSION
-
+ARG LS_JAVA_OPTS
 # https://github.com/elastic/logstash-docker
 FROM docker.elastic.co/logstash/logstash:${ELK_VERSION}
 
 # Add your logstash plugins setup here
 # Example: RUN logstash-plugin install logstash-filter-json
-RUN set -xe \
-    && echo ${LS_JAVA_OPTS}
+ENV LS_JAVA_OPTS ${LS_JAVA_OPTS}
 RUN logstash-plugin install logstash-filter-multiline

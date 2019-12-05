@@ -24,6 +24,7 @@ services:
       context: ./elk/logstash/
       args:
         ELK_VERSION: 7.4.2
+        LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     volumes:
       - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
@@ -34,7 +35,7 @@ services:
       - "5044:5044"
       - "9600:9600"
     environment:
-      LS_JAVA_OPTS: "-Xmx2048m -Xms2048m"
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
     depends_on:
