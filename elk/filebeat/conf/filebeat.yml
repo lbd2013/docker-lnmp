@@ -37,6 +37,27 @@ filebeat.inputs:
     tags: ["php-slow"]
     fields_under_root: true
 
+  - type: log
+    enabled: true
+    paths:
+      - /logs/mysql/mysql_error.log
+    tags: ["mysql-error"]
+    fields_under_root: true
+
+  - type: log
+    enabled: true
+    paths:
+      - /logs/mysql/mysql_general.log
+    tags: ["mysql-general"]
+    fields_under_root: true
+
+  - type: log
+    enabled: true
+    paths:
+      - /logs/mysql/mysql_slow.log
+    tags: ["mysql-slow"]
+    fields_under_root: true
+
 
 # ----------------output.kibana-------------------------
 #setup.kibana:
