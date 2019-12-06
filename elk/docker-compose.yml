@@ -52,10 +52,6 @@ services:
     container_name: kibana
     ports:
       - "5601:5601"
-    command:
-      - /bin/sh
-      - -c
-      - /usr/share/kibana/entrypoint.sh
     networks:
       - elk
     depends_on:
