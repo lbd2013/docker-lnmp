@@ -8,5 +8,6 @@ FROM docker.elastic.co/logstash/logstash:${ELK_VERSION}
 RUN logstash-plugin install logstash-filter-multiline
 
 USER root
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["-e", ""]
