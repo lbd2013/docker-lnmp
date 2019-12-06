@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 #创建kibana索引
 indexArr=("nginx-access-*" "nginx-error-*" "php-access-*" "php-error-*" "php-slow-*" "mysql-general-*")
 for indexName in ${indexArr[@]}
@@ -21,10 +19,12 @@ do
       break
     else
       sleep 2
-      echo '$indexName retrying...'
+      echo "$indexName retrying..."
     fi
   done
 done
+
+set -e
 
 #启动logstash
 exec "logstash"
