@@ -36,7 +36,6 @@ services:
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    entrypoint: '/usr/share/logstash/entrypoint.sh'
     networks:
       - elk
     depends_on:
