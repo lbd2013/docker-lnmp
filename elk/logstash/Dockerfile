@@ -7,5 +7,6 @@ FROM docker.elastic.co/logstash/logstash:${ELK_VERSION}
 # Example: RUN logstash-plugin install logstash-filter-json
 RUN logstash-plugin install logstash-filter-multiline
 
+USER root
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["-e", ""]
