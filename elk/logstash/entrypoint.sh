@@ -14,6 +14,7 @@ do
       -o /dev/null \
       -s \
       -w '%{http_code}')
+    echo "http_code $tmpCode"
     if [[ $tmpCode -eq 200 ]];then
       echo "$indexName success"
       break
