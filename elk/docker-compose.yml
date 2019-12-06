@@ -28,6 +28,7 @@ services:
       - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
       - ./elk/logstash/patterns/customize_patterns:/usr/share/logstash/customize_patterns
+      - ./elk/logstash/entrypoint.sh:/usr/share/logstash/entrypoint.sh
     container_name: logstash
     ports:
       - "5000:5000"
@@ -35,10 +36,11 @@ services:
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    entrypoint: '/usr/share/logstash/entrypoint.sh'
     networks:
       - elk
     depends_on:
-      - elasticsearch
+      - kibana
 
   kibana:
     build:
