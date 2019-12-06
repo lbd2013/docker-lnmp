@@ -20,6 +20,7 @@ do
       echo "$indexName success"
       break
     else
+      sleep 2
       echo '$indexName retrying...'
     fi
   done
