@@ -8,5 +8,6 @@ FROM docker.elastic.co/logstash/logstash:${ELK_VERSION}
 RUN logstash-plugin install logstash-filter-multiline
 
 USER root
-chmod 777 /usr/share/logstash/entrypoint.sh
+RUN chmod 777 /usr/share/logstash/entrypoint.sh 
+
 USER logstash
