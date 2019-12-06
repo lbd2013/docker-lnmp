@@ -438,3 +438,4 @@ docker rmi $(docker images | awk '/^<none>/ { print $3 }')
 * `cap_add，cap_drop` 添加或放弃容器的Linux能力（Capability）
 * `dns_search` 配置DNS搜索域。可以是一个值也可以是一个列表
 * 注意：使用compose对Docker容器进行编排管理时，需要编写docker-compose.yml文件，初次编写时，容易遇到一些比较低级的问题，导致执行docker-compose up时先解析yml文件的错误。比较常见的是yml对缩进的严格要求。yml文件还行后的缩进，不允许使用tab键字符，只能使用空格，而空格的数量也有要求，一般两个空格。
+* yml文件检测工具：http://www.yamllint.com/
