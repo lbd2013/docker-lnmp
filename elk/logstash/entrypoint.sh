@@ -8,7 +8,7 @@
 
 ##创建kibana索引
 export PYTHONIOENCODING=utf8
-indexArr=("filebeat-*" "aaa-*")
+indexArr=("filebeat-*")
 for indexName in ${indexArr[@]}
 do
   while true
