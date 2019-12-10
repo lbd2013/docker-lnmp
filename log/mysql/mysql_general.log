@@ -1,0 +1,3 @@
+2019-12-10T13:25:42.193677+08:00	   68 Connect	root@47.56.102.142 on mysql using TCP/IP
+2019-12-10T13:25:42.195857+08:00	   68 Query	show variables like '%version_compile_os%'
+2019-12-10T13:25:42.207200+08:00	   68 Quit

@@ -1,0 +1,3 @@
+[10-Dec-2019 15:10:23]  [pool www] pid 7
+script_filename = /var/www/html/slow.php
+[0x00007fd16381d090] sleep() /var/www/html/slow.php:2
