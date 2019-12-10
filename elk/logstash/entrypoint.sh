@@ -16,14 +16,6 @@ do
       -w '%{http_code}')
     echo "http_code $tmpCode"
 
-    curl -POST 'http://kibana:5601/api/saved_objects/index-pattern' \
-      -H 'Content-Type: application/json' \
-      -H 'kbn-version: 7.4.2' \
-      -u elastic:changeme \
-      -d '{"changes": {"defaultIndex": "-*"}}' \
-      -o /dev/null \
-      -s \
-      -w '%{http_code}'
     if [[ $tmpCode -eq 200 ]];then
       echo "$indexName success"
       break
@@ -33,6 +25,16 @@ do
     fi
   done
 done
+
+#设置默认索引
+curl -POST 'http://kibana:5601/api/saved_objects/index-pattern' \
+  -H 'Content-Type: application/json' \
+  -H 'kbn-version: 7.4.2' \
+  -u elastic:changeme \
+  -d '{"changes": {"defaultIndex": "-*"}}' \
+  -o /dev/null \
+  -s \
+  -w '%{http_code}'
 
 set -e
 
