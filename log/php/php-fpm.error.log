@@ -1,4 +1,0 @@
-[10-Dec-2019 15:10:16 Asia/Shanghai] PHP Fatal error:  Uncaught Error: Call to undefined function hpinfo() in /var/www/html/error.php:2
-Stack trace:
-#0 {main}
-  thrown in /var/www/html/error.php on line 2

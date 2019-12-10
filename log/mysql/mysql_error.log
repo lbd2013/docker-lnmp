@@ -1,2 +1,0 @@
-2019-12-10T11:19:27.741312+08:00 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
-mbind: Operation not permitted

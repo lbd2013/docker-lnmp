@@ -1,1 +1,0 @@
-2019/12/10 12:56:13 [error] 6#6: *12 FastCGI sent in stderr: "Primary script unknown" while reading response header from upstream, client: 210.75.207.91, server: localhost, request: "GET /MyAdmin/scripts/setup.php HTTP/1.1", upstream: "fastcgi://172.23.0.2:9000", host: "47.56.186.204"
