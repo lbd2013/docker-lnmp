@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #创建kibana索引
-indexArr=("nginx-access-*" "nginx-error-*" "php-access-*" "php-error-*" "php-slow-*" "mysql-general-*" "*-")
+indexArr=("nginx-access-*" "nginx-error-*" "php-access-*" "php-error-*" "php-slow-*" "mysql-general-*" "-*")
 for indexName in ${indexArr[@]}
 do
   while true
@@ -15,6 +15,15 @@ do
       -s \
       -w '%{http_code}')
     echo "http_code $tmpCode"
+
+    curl -POST 'http://kibana:5601/api/saved_objects/index-pattern' \
+      -H 'Content-Type: application/json' \
+      -H 'kbn-version: 7.4.2' \
+      -u elastic:changeme \
+      -d '{"changes": {"defaultIndex": "-*"}}' \
+      -o /dev/null \
+      -s \
+      -w '%{http_code}'
     if [[ $tmpCode -eq 200 ]];then
       echo "$indexName success"
       break
