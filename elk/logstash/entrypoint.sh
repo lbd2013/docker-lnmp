@@ -6,7 +6,7 @@ for indexName in ${indexArr[@]}
 do
   while true
   do
-    tmpCode=$(curl -POST 'http://kibana:5601/api/saved_objects/index-pattern' \
+    tmpCode=$(curl -POST 'http://kibana:5601/api/saved_objects/index-pattern?overwrite=true' \
       -H 'Content-Type: application/json' \
       -H 'kbn-version: 7.4.2' \
       -u elastic:changeme \
