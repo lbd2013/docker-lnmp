@@ -205,6 +205,8 @@ services:
     environment:
       - ZBX_HOSTNAME=zabbix-agent
       - ZBX_SERVER_HOST=zabbix-server
+    ports:
+      - 10050:10050
     depends_on:
       - zabbix-server
     networks:
