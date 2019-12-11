@@ -22,7 +22,7 @@ do
         -H 'Content-Type: application/json' \
         -H 'kbn-version: 7.4.2' \
         -u elastic:changeme \
-        -d '{"attributes":{"title":"'$indexName'","timeFieldName":"@timestamp"}}' \
+        -d '{"attributes":{"title":"'$indexName'","timeFieldName":"@timestamp"},"index" : {"highlight.max_analyzed_offset" : 10000000}}' \
         -o /dev/null \
         -s \
         -w '%{http_code}')
