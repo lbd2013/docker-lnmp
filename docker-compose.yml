@@ -204,7 +204,7 @@ services:
     restart: always
     environment:
       - ZBX_HOSTNAME=zabbix-agent
-      - ZBX_SERVER_HOST=zabbix-agent
+      - ZBX_SERVER_HOST=zabbix-server
     depends_on:
       - zabbix-server
     networks:
