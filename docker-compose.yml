@@ -176,7 +176,7 @@ services:
     networks:
       - backend
 
-  zabbix-web:
+  zabbix-web: #默认用户名：Admin 密码：zabbix
     image: zabbix/zabbix-web-nginx-mysql:alpine-4.4-latest
     container_name: zabbix-web
     restart: always
@@ -199,7 +199,7 @@ services:
       - backend
 
   zabbix-agent:
-    image: zabbix/zabbix-agent:alpine-latest
+    image: zabbix/zabbix-agent:alpine-4.4-latest
     container_name: zabbix-agent
     restart: always
     environment:
