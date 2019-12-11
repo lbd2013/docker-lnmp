@@ -201,6 +201,7 @@ services:
   zabbix-agent: #注意：由于这里使用的是docker环境，需要进入zabix-web界面，->Configuration ->Hosts
                 #Host name ，修改为 zabbix-agent
                 #Agent interfaces ，IP address中的127.0.0.1删掉，DNS name修改为zabbix-agent, Connect to修改为DNS
+                #然后重启docker-server，docker restart zabbix-server
                 #详情看：https://github.com/zabbix/zabbix-docker/issues/409   `kakakikikeke` 的回答
     image: zabbix/zabbix-agent:alpine-4.4-latest
     container_name: zabbix-agent
