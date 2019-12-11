@@ -203,12 +203,8 @@ services:
     container_name: zabbix-agent
     restart: always
     environment:
-      - ZA_Server=zabbix-server
-      - ZA_ServerActive=zabbix-server
-      - ZA_StartAgents=10
-      - ZA_Timeout=30
-    ports:
-      - 10050:10050
+      - ZBX_HOSTNAME=zabbix-agent
+      - ZBX_SERVER_HOST=zabbix-agent
     depends_on:
       - zabbix-server
     networks:
