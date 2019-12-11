@@ -64,8 +64,6 @@ services:
     user: root
     restart: always
     container_name: filebeat
-    command:
-      - '-d "*"'
     volumes:
       - ./elk/filebeat/conf/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./log:/logs:ro
