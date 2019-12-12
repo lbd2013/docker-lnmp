@@ -5,4 +5,4 @@ global:
 scrape_configs:
   - job_name: 'main'
     static_configs:
-      - targets: ['cadvisor:8082']
+      - targets: ['cadvisor:8080'] #如果是再在同一个docker的networks，应该使用networks内的端口
