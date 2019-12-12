@@ -213,6 +213,11 @@ services:
       - zabbix-server
     networks:
       - backend
+    volumes:
+      - /:/rootfs:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
 
   grfana: # 初始账号密码为 amdin admin
     image: grafana/grafana:latest
