@@ -230,6 +230,14 @@ services:
     volumes:
       - ./grafana/data:/var/lib/grafana
 
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - '9090:9090'
 networks:
   frontend:
   backend:
