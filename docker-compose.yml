@@ -157,6 +157,8 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /dev/disk/:/dev/disk:ro
+    networks:
+      - backend
 
   zabbix-server:
     image: zabbix/zabbix-server-mysql:alpine-4.4-latest
