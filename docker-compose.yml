@@ -214,7 +214,7 @@ services:
     networks:
       - backend
 
-  grfana:
+  grfana: # 初始账号密码为 amdin admin
     image: grafana/grafana:latest
     container_name: grafana
     restart: always
@@ -222,18 +222,6 @@ services:
       - 3000:3000
     networks:
       - backend
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=passw0rd
-      - GF_USERS_DEFAULT_THEME=dark
-      - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_USERS_ALLOW_ORG_CREATE=false
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-#      - GF_INSTALL_PLUGINS=
-      - MYSQL_ROOT_PASSWORD: 123456
-      - MYSQL_DATABASE: grafana
-      - MYSQL_USER: grafana
-      - MYSQL_PASSWORD: 123456
     volumes:
       - ./grafana/data:/var/lib/grafana
 
