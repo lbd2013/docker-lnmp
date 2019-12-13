@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 893,
   "graphTooltip": 1,
-  "id": 3,
-  "iteration": 1576224935929,
+  "id": 4,
+  "iteration": 1576225267381,
   "links": [],
   "panels": [
     {
@@ -120,7 +120,7 @@
           ],
           "defaults": {
             "mappings": [],
-            "max": 100,
+            "max": 1,
             "min": 0,
             "thresholds": [
               {
@@ -129,7 +129,7 @@
               },
               {
                 "color": "red",
-                "value": 70
+                "value": 0.7
               }
             ],
             "unit": "percentunit"
@@ -1517,7 +1517,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Docker and system monitoring",
-  "uid": "_ZXtSeaZk",
-  "version": 10
+  "title": "123213213123",
+  "uid": "_ZXtSeaZkcxzvxczv",
+  "version": 2
 }
