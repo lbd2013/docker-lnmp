@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 893,
   "graphTooltip": 1,
-  "id": 12,
-  "iteration": 1576198834452,
+  "id": 3,
+  "iteration": 1576224935929,
   "links": [],
   "panels": [
     {
@@ -144,7 +144,8 @@
       "pluginVersion": "6.5.2",
       "targets": [
         {
-          "expr": "sum(rate(process_cpu_seconds_total[$interval]))",
+          "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[6s]))",
+          "intervalFactor": 1,
           "refId": "A"
         }
       ],
@@ -194,7 +195,7 @@
       "pluginVersion": "6.5.2",
       "targets": [
         {
-          "expr": "sum (container_memory_usage_bytes{image!=\"\"}) / 1024 / 1024 / 1024 / 16",
+          "expr": "sum (container_memory_usage_bytes{image!=\"\"}) / sum(machine_memory_bytes)",
           "refId": "A"
         }
       ],
@@ -424,7 +425,7 @@
           "value": "null"
         }
       ],
-      "valueName": "avg"
+      "valueName": "current"
     },
     {
       "aliasColors": {
@@ -475,34 +476,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_system_seconds_total[1m]))",
-          "hide": true,
-          "intervalFactor": 2,
-          "legendFormat": "a",
-          "refId": "B",
-          "step": 120
-        },
-        {
-          "expr": "sum(rate(container_cpu_system_seconds_total{name=~\".+\"}[1m]))",
-          "hide": true,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "nur container",
-          "refId": "F",
-          "step": 10
-        },
-        {
-          "expr": "sum(rate(container_cpu_system_seconds_total{id=\"/\"}[1m]))",
-          "hide": true,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "nur docker host",
-          "metric": "",
-          "refId": "A",
-          "step": 20
-        },
-        {
-          "expr": "sum(rate(process_cpu_seconds_total[$interval])) * 100",
+          "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[6s]) * 100)",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
@@ -510,14 +484,6 @@
           "metric": "",
           "refId": "C",
           "step": 600
-        },
-        {
-          "expr": "sum(rate(container_cpu_system_seconds_total{name=~\".+\"}[1m])) + sum(rate(container_cpu_system_seconds_total{id=\"/\"}[1m])) + sum(rate(process_cpu_seconds_total[1m]))",
-          "hide": true,
-          "intervalFactor": 2,
-          "legendFormat": "",
-          "refId": "D",
-          "step": 120
         }
       ],
       "thresholds": [],
@@ -610,7 +576,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[$interval])) by (name) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[6s])) by (name) * 100",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
@@ -1522,7 +1488,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1553,5 +1519,5 @@
   "timezone": "browser",
   "title": "Docker and system monitoring",
   "uid": "_ZXtSeaZk",
-  "version": 65
+  "version": 10
 }
