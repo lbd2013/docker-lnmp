@@ -17,7 +17,7 @@
   "gnetId": 893,
   "graphTooltip": 1,
   "id": 12,
-  "iteration": 1576144014172,
+  "iteration": 1576198834452,
   "links": [],
   "panels": [
     {
@@ -92,6 +92,7 @@
       ],
       "thresholds": "",
       "title": "Containers",
+      "transparent": true,
       "type": "singlestat",
       "valueFontSize": "120%",
       "valueMaps": [
@@ -131,7 +132,7 @@
                 "value": 70
               }
             ],
-            "unit": "percent"
+            "unit": "percentunit"
           },
           "override": {},
           "values": false
@@ -143,13 +144,14 @@
       "pluginVersion": "6.5.2",
       "targets": [
         {
-          "expr": "sum(rate(process_cpu_seconds_total[$interval])) * 100",
+          "expr": "sum(rate(process_cpu_seconds_total[$interval]))",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
       "title": "Cpu Usage",
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -199,6 +201,7 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Memory Usage",
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -248,6 +251,7 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Disk Usage",
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -259,7 +263,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": null,
+      "datasource": "Prometheus",
       "format": "mbytes",
       "gauge": {
         "maxValue": 100,
@@ -315,6 +319,8 @@
       "targets": [
         {
           "expr": "sum(container_memory_usage_bytes{image!=\"\"})/1024/1024",
+          "instant": false,
+          "intervalFactor": 2,
           "refId": "A"
         }
       ],
@@ -322,6 +328,7 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Memory Usage",
+      "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -331,7 +338,7 @@
           "value": "null"
         }
       ],
-      "valueName": "avg"
+      "valueName": "current"
     },
     {
       "cacheTimeout": null,
@@ -407,6 +414,7 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Disk Usage",
+      "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -523,6 +531,7 @@
         "sort": 0,
         "value_type": "cumulative"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -622,6 +631,7 @@
         "sort": 0,
         "value_type": "individual"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -710,6 +720,7 @@
         "sort": 0,
         "value_type": "individual"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -816,6 +827,7 @@
         "sort": 0,
         "value_type": "individual"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -864,13 +876,14 @@
       "hiddenSeries": false,
       "id": 47,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "current": true,
+        "max": true,
+        "min": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -889,6 +902,7 @@
       "targets": [
         {
           "expr": "container_fs_usage_bytes{device=\"/dev/vda1\",id=\"/\"}",
+          "legendFormat": "host",
           "refId": "A"
         }
       ],
@@ -902,6 +916,7 @@
         "sort": 0,
         "value_type": "individual"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -991,6 +1006,7 @@
         "sort": 0,
         "value_type": "individual"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -1097,6 +1113,7 @@
         "sort": 0,
         "value_type": "cumulative"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -1201,6 +1218,7 @@
         "sort": 0,
         "value_type": "cumulative"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -1307,6 +1325,7 @@
         "sort": 0,
         "value_type": "cumulative"
       },
+      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -1339,7 +1358,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 21,
   "style": "dark",
   "tags": [],
@@ -1503,7 +1522,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1534,5 +1553,5 @@
   "timezone": "browser",
   "title": "Docker and system monitoring",
   "uid": "_ZXtSeaZk",
-  "version": 60
+  "version": 65
 }
