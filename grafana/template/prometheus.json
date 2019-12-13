@@ -17,7 +17,7 @@
   "gnetId": 893,
   "graphTooltip": 1,
   "id": 4,
-  "iteration": 1576225267381,
+  "iteration": 1576226882725,
   "links": [],
   "panels": [
     {
@@ -116,7 +116,7 @@
       "options": {
         "fieldOptions": {
           "calcs": [
-            "mean"
+            "lastNotNull"
           ],
           "defaults": {
             "mappings": [],
@@ -167,7 +167,7 @@
       "options": {
         "fieldOptions": {
           "calcs": [
-            "mean"
+            "lastNotNull"
           ],
           "defaults": {
             "mappings": [],
@@ -217,7 +217,7 @@
       "options": {
         "fieldOptions": {
           "calcs": [
-            "mean"
+            "lastNotNull"
           ],
           "defaults": {
             "mappings": [],
@@ -452,6 +452,8 @@
         "alignAsTable": true,
         "avg": true,
         "current": true,
+        "hideEmpty": false,
+        "hideZero": true,
         "max": true,
         "min": true,
         "rightSide": false,
@@ -462,7 +464,7 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null as zero",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -479,7 +481,7 @@
           "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[6s]) * 100)",
           "hide": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 1,
           "legendFormat": "host",
           "metric": "",
           "refId": "C",
@@ -562,7 +564,7 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null as zero",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -656,7 +658,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -752,7 +754,7 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null as zero",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -853,7 +855,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -943,7 +945,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -1039,7 +1041,7 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null as zero",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -1144,7 +1146,7 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null as zero",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -1251,7 +1253,7 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null as zero",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
@@ -1517,7 +1519,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "123213213123",
+  "title": "docker+cadvisor+procemethues",
   "uid": "_ZXtSeaZkcxzvxczv",
-  "version": 2
+  "version": 11
 }
