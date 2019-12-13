@@ -221,8 +221,6 @@ services:
     build: ./cadvisor
     restart: always
     container_name: cadvisor
-    command:
-      - '--privileged=true'
     ports:
       - 8082:8080
     volumes:
