@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 893,
   "graphTooltip": 1,
-  "id": 4,
-  "iteration": 1576226882725,
+  "id": 6,
+  "iteration": 1576227431461,
   "links": [],
   "panels": [
     {
@@ -91,7 +91,7 @@
         }
       ],
       "thresholds": "",
-      "title": "Containers",
+      "title": "up Containers",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "120%",
@@ -1519,7 +1519,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "docker+cadvisor+procemethues",
-  "uid": "_ZXtSeaZkcxzvxczv",
-  "version": 11
+  "title": "docker+cadvisor+procemethues1",
+  "uid": "_ZXtSeaZkcxzvxczv2",
+  "version": 2
 }
