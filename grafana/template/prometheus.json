@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 893,
   "graphTooltip": 1,
-  "id": 6,
-  "iteration": 1576227431461,
+  "id": 1,
+  "iteration": 1576735795811,
   "links": [],
   "panels": [
     {
@@ -581,7 +581,7 @@
           "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[6s])) by (name) * 100",
           "hide": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 1,
           "legendFormat": "{{name}}",
           "metric": "",
           "refId": "F",
@@ -1521,5 +1521,5 @@
   "timezone": "browser",
   "title": "docker+cadvisor+procemethues1",
   "uid": "_ZXtSeaZkcxzvxczv2",
-  "version": 2
+  "version": 3
 }
