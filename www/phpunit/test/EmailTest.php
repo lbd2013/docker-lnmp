@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require "../vendor/autoload.php";
+require __DIR__."/../vendor/autoload.php";
 use PHPUnit\Framework\TestCase;
 
 final class EmailTest extends TestCase
@@ -21,6 +21,14 @@ final class EmailTest extends TestCase
     }
 
     public function testCanBeUsedAsString(): void
+    {
+        $this->assertEquals(
+            'user@example.com',
+            Email::fromString('user@example.com')
+        );
+    }
+
+    public function testCanBeUsedAsString1(): void
     {
         $this->assertEquals(
             'user@example.com',

@@ -1,2 +1,5 @@
-vendor
+.phpunit.result.cache
+CodeCoverage
+!vendor/*
+!phpunit.xml
 !.gitignore
