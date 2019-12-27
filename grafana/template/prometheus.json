@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 893,
   "graphTooltip": 1,
-  "id": 1,
-  "iteration": 1576735795811,
+  "id": 3,
+  "iteration": 1577434118673,
   "links": [],
   "panels": [
     {
@@ -144,7 +144,7 @@
       "pluginVersion": "6.5.2",
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[6s]))",
+          "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[10s]))",
           "intervalFactor": 1,
           "refId": "A"
         }
@@ -478,7 +478,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[6s]) * 100)",
+          "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[10s]) * 100)",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
@@ -505,7 +505,7 @@
         "buckets": null,
         "mode": "time",
         "name": null,
-        "show": false,
+        "show": true,
         "values": []
       },
       "yaxes": [
@@ -578,7 +578,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[6s])) by (name) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[10s])) by (name) * 100",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
@@ -1519,7 +1519,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "docker+cadvisor+procemethues1",
+  "title": "docker+cadvisor+procemethues",
   "uid": "_ZXtSeaZkcxzvxczv2",
-  "version": 3
+  "version": 5
 }
