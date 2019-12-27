@@ -7,6 +7,8 @@ curl -sSL https://get.docker.com/ | sh
 
 # 设置开机自启
 sudo systemctl enable docker.service
+
+# 启动docker
 sudo service docker start
 
 # 安装docker-compose
