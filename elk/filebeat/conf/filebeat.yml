@@ -16,25 +16,48 @@ filebeat.inputs:
     tags: ["nginx-error"]
     fields_under_root: true
 
+  #php7
   - type: log
     enabled: true
     paths:
       - /logs/php/php-fpm.access.log
-    tags: ["php-access"]
+    tags: ["php7-access"]
     fields_under_root: true
 
   - type: log
     enabled: true
     paths:
       - /logs/php/php-fpm.error.log
-    tags: ["php-error"]
+    tags: ["php7-error"]
     fields_under_root: true
 
   - type: log
     enabled: true
     paths:
       - /logs/php/php-fpm.slow.log
-    tags: ["php-slow"]
+    tags: ["php7-slow"]
+    fields_under_root: true
+
+  #php5
+  - type: log
+    enabled: true
+    paths:
+      - /logs/php5/php-fpm.access.log
+    tags: ["php5-access"]
+    fields_under_root: true
+
+  - type: log
+    enabled: true
+    paths:
+      - /logs/php5/php-fpm.error.log
+    tags: ["php5-error"]
+    fields_under_root: true
+
+  - type: log
+    enabled: true
+    paths:
+      - /logs/php5/php-fpm.slow.log
+    tags: ["php5-slow"]
     fields_under_root: true
 
   - type: log

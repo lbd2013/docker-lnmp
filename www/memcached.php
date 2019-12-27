@@ -12,4 +12,5 @@ echo $mc->getResultCode();
 echo "</br>";
 
 var_dump($mc->getAllKeys());
+echo "</br>";
 var_dump($mc->get($key));

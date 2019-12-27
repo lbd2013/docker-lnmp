@@ -6,6 +6,7 @@ services:
       - php
     ports: 
       - "80:80"
+      - "81:81"
       - "443:443"
     volumes:
       - ./www:/var/www/html
@@ -18,8 +19,11 @@ services:
     restart: always
     container_name: nginx
 
+  #php7.3
   php:
     build: ./php
+    ports:
+      - "9000:9000"
     volumes:
       - ./www:/var/www/html
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
@@ -31,6 +35,25 @@ services:
       - backend
     restart: always
     container_name: php
+    cap_add:
+      - SYS_PTRACE
+
+  #php5.6
+  php5:
+    build: ./php5
+    ports:
+      - "9500:9000"
+    volumes:
+      - ./www:/var/www/html
+      - ./php5/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php5/config/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./php5/config/php-fpm.d:/usr/local/etc/php-fpm.d
+      - ./log/php5:/var/log/php
+    networks:
+      - frontend
+      - backend
+    restart: always
+    container_name: php5
     cap_add:
       - SYS_PTRACE
 

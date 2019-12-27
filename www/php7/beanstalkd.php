@@ -7,7 +7,7 @@ echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 echo "</br> </br> </br> </br> </br> </br> </br> </br> </br>";
 
 // Hopefully you're using Composer autoloading.
-include_once "vendor/autoload.php";
+include_once "../vendor/autoload.php";
 use Pheanstalk\Pheanstalk;
 
 // Create using autodetection of socket implementation

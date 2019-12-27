@@ -4,8 +4,8 @@ echo "执行以下语句，amqplib库，（库 github地址 ：https://github.co
 echo "官方hello word：https://www.rabbitmq.com/tutorials/tutorial-one-php.html </br>";
 
 echo "docker exec php composer require php-amqplib/php-amqplib </br>";
-echo "docker exec php composer update -vvv ";
-echo "管理页面：your_host:15672";
+echo "docker exec php composer update -vvv  </br>";
+echo "管理页面：your_host:15672  </br>";
 echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  </br>";
 echo "</br> </br> </br> </br> </br> </br> </br> </br> </br>";
 
