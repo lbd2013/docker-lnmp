@@ -7,4 +7,4 @@ php:
 #  - composer install
 
 script:
-  phpunit -c www/phpunit/phpunit.xml
+  phpunit -c www/php7/phpunit/phpunit.xml
