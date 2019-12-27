@@ -1,44 +1,29 @@
-# <center>使用Docker 部署 LNMP+Redis 环境 </center>
-### <font face="黑体">Docker 简介</font>
-  Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。推荐内核版本3.8及以上
+# <center>使用Docker-compose 部署 LNMP+Redis+Memcache+Mongo+Rabbitmq+Beanstalk+Zabbix+Elk 环境 </center>
 
-### 为什么使用Docker
-
-1. 加速本地的开发和构建流程，容器可以在开发环境构建，然后轻松地提交到测试环境，并最终进入生产环境
-2. 能够在让独立的服务或应用程序在不同的环境中得到相同的运行结果  
-3. 创建隔离的环境来进行测试  
-4. 高性能、超大规划的宿主机部署  
-5. 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境
-
-
-## 目录
-* [安装Docker](#安装Docker)
-* [目录结构](#目录结构)
-* [快速使用](#创建镜像与安装)
-* [进入容器内部](#进入容器内部)
-* [PHP扩展安装](#PHP扩展安装)
-* [Composer安装](#Composer安装)
-* [常见问题处理](#常见问题处理)
-* [常用命令](#常用命令)
-* [Dockerfile语法](#Dockerfile语法)
-* [docker-compose语法说明](#docker-compose语法说明)
-
-### 安装Docker
-**windows 安装**
-
-[参考](http://www.iganlei.cn/environment-configuration/798.html)
-
-**mac**
- 
-[docker toolbox参考](https://github.com/widuu/chinese_docker/blob/master/installation/mac.md) 
-
-**linux**
-
+### 安装Docker、docker-compose
 ```
 # 下载安装
 curl -sSL https://get.docker.com/ | sh
 
-# centos8 会出现以下错误：
+# 设置开机自启
+sudo systemctl enable docker.service
+sudo service docker start
+
+# 安装docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+```
+
+### 启动
+```
+yum install -y git
+git clone https://github.com/lbd2013/docker-lnmp.git
+cd docker-lnmp
+sh init.sh
+```
+
+### centos8 安装docker错误
+```
 Error: 
  Problem: package docker-ce-3:19.03.5-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
   - cannot install the best candidate for the job
@@ -48,85 +33,10 @@ Error:
   - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
   - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
   - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
-# 解决：
+
+# 解决方法：
 yum -y install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
 然后再执行 curl -sSL https://get.docker.com/ | sh
-
-# 设置开机自启
-sudo systemctl enable docker.service
-
-sudo service docker start|restart|stop
-
-# 安装docker-compose
-curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-```
-
-### 目录结构
-
-```
-├── docker-compose.yml
-├── log
-│   ├── mysql
-│   │   ├── mysql_error.log
-│   │   ├── mysql_general.log
-│   │   └── mysql_slow.log
-│   ├── nginx
-│   ├── php
-│   └── redis
-│       └── redis.log
-├── mysql
-│   ├── conf.d
-│   │   └── www.cnf
-│   ├── Dockerfile
-│   ├── init.sql
-│   ├── my.cnf
-├── nginx
-│   ├── cert
-│   ├── conf.d
-│   │   └── default.conf
-│   ├── Dockerfile
-│   └── nginx.conf
-├── php
-│   ├── config
-│   │   ├── php-fpm.conf
-│   │   ├── php-fpm.d
-│   │   │   ├── docker.conf
-│   │   │   ├── www.conf
-│   │   │   ├── www.conf.default
-│   │   │   └── zz-docker.conf
-│   │   └── php.ini
-│   └── Dockerfile
-├── redis
-│   ├── Dockerfile
-│   └── redis.conf
-└── www
-    ├── db.php
-    ├── error.php
-    ├── index.html
-    ├── index.php
-    ├── redis.php
-    └── slow.php
-```
-
-
-
-### 创建镜像与安装
-> 直接使用docker-compose一键制作镜像并启动容器
-
-```
-yum install -y git
-git clone https://github.com/lbd2013/docker-lnmp.git
-cd docker-lnmp
-chmod -R 777 ./log
-chmod -R 777 ./redis/data
-chmod -R 777 ./mongod/data
-chmod -R 777 ./elk/elasticsearch/data
-chmod -R 777 ./elk/logstash/pipeline
-chmod -R 777 ./zabbix/web/data
-chmod -R 777 ./zabbix/server/data
-chmod -R 777 ./grafana/data
-docker-compose -f docker-compose.yml -f elk/docker-compose.yml up -d
 ```
 
 ###centos8 执行命令docker-compose up -d 异常处理
