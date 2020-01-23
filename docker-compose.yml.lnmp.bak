@@ -1,0 +1,272 @@
+version: '3.2'
+services:
+  nginx:
+    build: ./nginx
+    depends_on:
+      - php
+    ports: 
+      - "80:80"
+      - "81:81"
+      - "82:82"
+      - "443:443"
+    volumes:
+      - ./www:/var/www/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/cert:/etc/nginx/cert
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./log/nginx:/var/log/nginx
+    networks:
+      - frontend
+    restart: always
+    container_name: nginx
+
+  #php7.3
+  php:
+    build: ./php
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./www:/var/www/html
+      - ./php/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php/config/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./php/config/php-fpm.d:/usr/local/etc/php-fpm.d
+      - ./log/php:/var/log/php
+    networks:
+      - frontend
+      - backend
+    restart: always
+    container_name: php
+    cap_add:
+      - SYS_PTRACE
+
+#  #php5.6
+#  php5:
+#    build: ./php5
+#    ports:
+#      - "9500:9000"
+#    volumes:
+#      - ./www:/var/www/html
+#      - ./php5/config/php.ini:/usr/local/etc/php/php.ini
+#      - ./php5/config/php-fpm.conf:/usr/local/etc/php-fpm.conf
+#      - ./php5/config/php-fpm.d:/usr/local/etc/php-fpm.d
+#      - ./log/php5:/var/log/php
+#    networks:
+#      - frontend
+#      - backend
+#    restart: always
+#    container_name: php5
+#    cap_add:
+#      - SYS_PTRACE
+
+  mysql:
+    build: ./mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/conf.d/www.cnf:/etc/mysql/conf.d/www.cnf
+      - ./log/mysql/mysql_error.log:/var/log/mysql/mysql_error.log
+      - ./log/mysql/mysql_general.log:/var/log/mysql/mysql_general.log
+      - ./log/mysql/mysql_slow.log:/var/log/mysql/mysql_slow.log
+    environment:
+        - MYSQL_ROOT_PASSWORD=a383559113
+        - TZ=Asia/Shanghai
+    networks:
+      - backend
+    restart: always
+    container_name: mysql
+
+#  redis:
+#    build: ./redis
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - ./redis/redis.conf/:/usr/local/etc/redis.conf
+#      - ./redis/data:/usr/local/redis/data
+#      - ./log/redis/redis.log:/var/log/redis/redis.log
+#    networks:
+#      - backend
+#    environment:
+#      - TZ=Asia/Shanghai
+#    restart: always
+#    container_name: redis
+
+  myadmin:
+    build: ./phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+        - PMA_HOST=mysql
+        - TZ=Asia/Shanghai
+    networks:
+      - backend
+    container_name: phpmyadmin
+
+#  memcached:
+#    build: ./memcached
+#    container_name: memcached
+#    ports:
+#      - "11211:11211"
+#    volumes:
+#      - ./log/memcached/memcached.log/:/tmp/memcached.log
+#    networks:
+#      - backend
+
+#  mongod:
+#    build: ./mongod
+#    restart: always
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: 1234567
+#    command:
+#      - '--config'
+#      - '/etc/mongod.conf'
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - ./log/mongod/mongod.log:/var/log/mongodb/mongod.log
+#      - ./mongod/data:/var/lib/mongodb
+#      - ./mongod/etc/mongod.conf:/etc/mongod.conf
+#      - ./mongod/tmp/.dbshell:/home/mongodb/.dbshell
+#    networks:
+#      - backend
+#    container_name: mongod
+
+#  beanstalkd:
+#    build: ./beanstalkd
+#    restart: always
+#    container_name: beanstalkd
+#    volumes:
+#      - ./beanstalkd/binlog:/tmp/beanstalkd_binlog
+#    ports:
+#      - "11300:11300"
+#    networks:
+#      - backend
+
+#  beanstalk_console:
+#    build: ./beanstalk_console
+#    restart: always
+#    container_name: beanstalk_console
+#    ports:
+#      - 8081:80
+#    environment:
+#      - BEANSTALKD_HOST=beanstalkd
+#    networks:
+#      - backend
+
+#  rabbitmq:
+#    build: ./rabbitmq
+#    restart: always
+#    container_name: rabbitmq
+#    ports:
+#      - 5672:5672
+#      - 15672:15672
+#    environment:
+#      - RABBITMQ_DEFAULT_USER=root
+#      - RABBITMQ_DEFAULT_PASS=123456
+#    networks:
+#      - backend
+
+#  zabbix-server:
+#    image: zabbix/zabbix-server-mysql:alpine-4.4-latest
+#    container_name: zabbix-server
+#    restart: always
+#    environment:
+#      - DB_SERVER_HOST=mysql
+#      - DB_SERVER_PORT=3306
+#      - MYSQL_USER=root
+#      - MYSQL_PASSWORD=123456
+#      - MYSQL_DATABASE=zabbix
+#    ports:
+#      - 10051:10051
+#    volumes:
+##      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime
+#      - ./zabbix/server/data:/data
+#    networks:
+#      - backend
+#
+#  zabbix-web: #默认用户名：Admin 密码：zabbix
+#    image: zabbix/zabbix-web-nginx-mysql:alpine-4.4-latest
+#    container_name: zabbix-web
+#    restart: always
+#    environment:
+#      - DB_SERVER_HOST=mysql
+#      - DB_SERVER_PORT=3306
+#      - MYSQL_USER=root
+#      - MYSQL_PASSWORD=123456
+#      - MYSQL_DATABASE=zabbix
+#      - PHP_TZ="Asia/Shanghai"
+#    ports:
+#      - 10005:80
+#    volumes:
+##      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime
+#      - ./zabbix/fonts/simkai.ttf:/usr/share/zabbix/assets/fonts/DejaVuSans.ttf
+#      - ./zabbix/web/data:/data
+#    depends_on:
+#      - zabbix-server
+#    networks:
+#      - backend
+#
+#  zabbix-agent: #注意：由于这里使用的是docker环境，需要进入zabix-web界面，->Configuration ->Hosts
+#                #Host name ，修改为 zabbix-agent
+#                #Agent interfaces ，IP address中的127.0.0.1删掉，DNS name修改为zabbix-agent, Connect to修改为DNS
+#                #然后重启docker-server，docker restart zabbix-server，通过docker logs查看zabbix-server日志，等待重启完成
+#                #详情看：https://github.com/zabbix/zabbix-docker/issues/409   `kakakikikeke` 的回答
+#    image: zabbix/zabbix-agent:alpine-4.4-latest
+#    container_name: zabbix-agent
+#    restart: always
+#    environment:
+#      - ZBX_HOSTNAME=zabbix-agent
+#      - ZBX_SERVER_HOST=zabbix-server
+#    depends_on:
+#      - zabbix-server
+#    networks:
+#      - backend
+#    volumes:
+#      - /:/rootfs:ro
+#      - /etc/localtime:/etc/localtime:ro
+#      - /var/run:/var/run:ro
+#      - /sys:/sys:ro
+
+#  grfana: # 初始账号密码为 admin admin
+#    image: grafana/grafana:latest
+#    container_name: grafana
+#    restart: always
+#    ports:
+#      - 3000:3000
+#    networks:
+#      - backend
+#    volumes:
+#      - ./grafana/data:/var/lib/grafana
+#
+#  cadvisor:
+#    build: ./cadvisor
+#    restart: always
+#    container_name: cadvisor
+#    ports:
+#      - 8082:8080
+#    volumes:
+#      - /:/rootfs:ro
+#      - /var/run:/var/run:ro
+#      - /sys:/sys:ro
+#      - /var/lib/docker/:/var/lib/docker:ro
+#    networks:
+#      - backend
+#
+#  prometheus:
+#    image: prom/prometheus:latest
+#    container_name: prometheus
+#    volumes:
+#      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+#    command:
+#      - '--config.file=/etc/prometheus/prometheus.yml'
+#    ports:
+#      - 9090:9090
+#    networks:
+#      - backend
+networks:
+  frontend:
+  backend:
+    
