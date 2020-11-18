@@ -83,7 +83,7 @@ services:
       - ./log/mysql/mysql_general.log:/var/log/mysql/mysql_general.log
       - ./log/mysql/mysql_slow.log:/var/log/mysql/mysql_slow.log
     environment:
-        - MYSQL_ROOT_PASSWORD=JxcLvfC9Pf7XCnhEj64m
+        - MYSQL_ROOT_PASSWORD=123456
         - TZ=Asia/Shanghai
     networks:
       - backend
