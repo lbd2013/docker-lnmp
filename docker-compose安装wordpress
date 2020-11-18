@@ -1,20 +1,27 @@
 ``````
-问题：
-1.WordPress无法建立到WordPress.org的安全连接，请联系您的服务器管理员。
+操作方法：
+1.通过docker-compose搭建一个nginx + php + mysql + phpmyadmin环境
+2.到wordpress.org下载一个压缩包，解压后，放到nginx的对外访问目录里面
+3.到mysql里面创建一个wordpress的数据库
+
+
+遇到的问题：
+1.无权限修改 wp-config
+chown -R git:git wordpress
+这里的git:git，是我的用户组以及用户的名字，如果你用的不是我的配置文件，那你的大概率是www-data:www-data。
+具体需要看自己的php.conf文件里面的user跟group是什么。也就是php-pfm的conf或者php.ini里面的user跟group的名字，对应上即可。
+对应的路劲是：vim php/config/php-fpm.d/www.conf
+
+2.WordPress无法建立到WordPress.org的安全连接，请联系您的服务器管理员。
 vim /etc/resolv.conf
 增加一下两句话，注意：不是容器内，是主机
 nameserver 233.5.5.5
 nameserver 233.6.6.6
 
+3.无法升级主题、更新插件，提示要输入ftp账号密码
+跟问题1是同一个问题
 
-
-2.无法升级主题、更新插件，提示要输入ftp账号密码
-chown -R git:git wordpress
-这里的git:git，需要看自己的php.conf文件里面的user跟group是什么。不一定是git:git，也有可能是www-data:www-data
-也就是php-pfm的conf或者php.ini里面的user跟group的名字，对应上即可。对应的路劲是：vim php/config/php-fpm.d/www.conf
-
-
-3.
+4.
 Briefly unavailable for scheduled maintenance. Check back in a minute.
 到wordpress 根目录删除.maintenance
 rm .maintenance
