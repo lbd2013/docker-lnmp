@@ -2,7 +2,7 @@ FROM daocloud.io/library/php:7.3-fpm-alpine
 COPY config/php.ini /usr/local/etc/php
 
 ENV BUILD_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
-ENV PHPREDIS_VERSION master
+ENV PHPREDIS_VERSION 5.3.4
 ENV SWOOLE_VERSION master
 ENV MEMCACHED_VERSION master
 ENV TZ=Asia/Shanghai
@@ -26,7 +26,7 @@ RUN set -xe \
 RUN set -xe \
     && cd ~ \
     #php redis扩展
-    && wget https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz -O php-phpredis.tar.gz \
+    && wget https://github.com/phpredis/phpredis/archive/refs/tags/$PHPREDIS_VERSION.tar.gz -O php-phpredis.tar.gz \
     && mkdir ./php-phpredis && tar -xzvf php-phpredis.tar.gz -C ./php-phpredis --strip-components 1 \
     && mkdir -p /usr/src/php/ext \
     && mv php-phpredis /usr/src/php/ext/redis \
