@@ -3,7 +3,7 @@
 ### 安装Docker、docker-compose
 ```
 # 下载安装
-curl -sSL https://get.docker.com/ | sh
+https://docs.docker.com/engine/install/centos/
 
 # 设置开机自启
 sudo systemctl enable docker.service
