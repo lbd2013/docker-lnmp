@@ -46,5 +46,5 @@ RUN set -xe \
     && cd ~ \
     #php mongo扩展
     && apk add --virtual build-dependencies build-base openssl-dev autoconf \
-    && pecl install mongodb \
-    && docker-php-ext-enable mongodb
+    && pecl install mongo \
+    && docker-php-ext-enable mongo
