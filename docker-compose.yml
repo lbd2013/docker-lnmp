@@ -199,7 +199,9 @@ services:
       - MYSQL_DATABASE=zabbix
       - PHP_TZ="Asia/Shanghai"
     ports:
-      - 10005:80
+      - 10055:80
+      - 10056:8080
+      - 10057:8443
     volumes:
 #      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime
       - ./zabbix/fonts/simkai.ttf:/usr/share/zabbix/assets/fonts/DejaVuSans.ttf
