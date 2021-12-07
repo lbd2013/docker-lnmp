@@ -40,7 +40,7 @@ services:
     depends_on:
       - kibana
 
-  kibana: #elastic changeme
+  kibana: #账号: elastic 密码: changeme
     build:
       context: ./elk/kibana/
       args:
