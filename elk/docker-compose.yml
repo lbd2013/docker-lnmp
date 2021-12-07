@@ -40,7 +40,7 @@ services:
     depends_on:
       - kibana
 
-  kibana:
+  kibana: #elastic changeme
     build:
       context: ./elk/kibana/
       args:
