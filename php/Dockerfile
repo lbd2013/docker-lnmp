@@ -26,35 +26,20 @@ RUN set -xe \
 RUN set -xe \
     && cd ~ \
     #php redis扩展
-    && wget https://github.com/phpredis/phpredis/archive/refs/tags/$PHPREDIS_VERSION.tar.gz -O php-phpredis.tar.gz \
-    && mkdir ./php-phpredis && tar -xzvf php-phpredis.tar.gz -C ./php-phpredis --strip-components 1 \
-    && mkdir -p /usr/src/php/ext \
-    && mv php-phpredis /usr/src/php/ext/redis \
-    && docker-php-ext-install redis \
-    && rm -rf ./php-phpredis \
-    && rm -rf /usr/src/php/ext/redis
+    && apk add --no-cache pcre-dev $PHPIZE_DEPS \
+    && pecl install redis \
+    && docker-php-ext-enable redis
 RUN set -xe \
     && cd ~ \
     #php swoole扩展
-    && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz -O php-swoole.tar.gz \
-    && mkdir ./php-swoole && tar -xzvf php-swoole.tar.gz -C ./php-swoole --strip-components 1 \
-    && mv php-swoole /usr/src/php/ext/swoole \
-    && docker-php-ext-configure zip --with-libzip \
-    && docker-php-ext-install swoole \
-    && rm -rf ./php-swoole \
-    && rm -rf /usr/src/php/ext/swoole
+    && pecl install swoole \
+    && docker-php-ext-enable swoole
 RUN set -xe \
     && cd ~ \
     #php memcache扩展
-    && apk add --no-cache --update libmemcached-libs zlib \
-    && apk add --no-cache --update --virtual .build-deps $BUILD_DEPS \
-    && wget https://github.com/php-memcached-dev/php-memcached/archive/$MEMCACHED_VERSION.tar.gz -O php-memcached.tar.gz \
-    && mkdir ./php-memcached && tar -xzvf php-memcached.tar.gz -C ./php-memcached --strip-components 1 \
-    && mv php-memcached /usr/src/php/ext/memcached \
-    && docker-php-ext-install /usr/src/php/ext/memcached \
-    && rm -rf ./php-memcached \
-    && rm -rf /usr/src/php/ext/memcached \
-    && apk del .build-deps
+    && apk add --update --no-cache libmemcached-dev \
+    && pecl install memcached-3.1.4 \
+    && docker-php-ext-enable memcached
 RUN set -xe \
     && cd ~ \
     #php mongo扩展
