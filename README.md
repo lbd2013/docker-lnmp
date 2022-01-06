@@ -3,10 +3,10 @@
 ### 安装Docker
 [说明文档](https://docs.docker.com/engine/install/centos/)
 
-### 安装docker-compose
+### 安装Docker-compose
 [说明文档](https://docs.docker.com/compose/install/)
 
-### docker 换国内源
+### Docker 换国内源
 ```
 sudo vim /etc/docker/daemon.json
 ```
