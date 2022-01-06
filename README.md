@@ -6,6 +6,26 @@
 ### 安装docker-compose
 [说明文档](https://docs.docker.com/compose/install/)
 
+### docker 换国内源
+```
+sudo vim /etc/docker/daemon.json
+```
+```
+{
+    "registry-mirrors": [
+        "https://kfwkfulq.mirror.aliyuncs.com",
+        "https://2lqq34jg.mirror.aliyuncs.com",
+        "https://pee6w651.mirror.aliyuncs.com",
+        "https://registry.docker-cn.com",
+        "http://hub-mirror.c.163.com"
+    ],
+    "dns": ["8.8.8.8","8.8.4.4"]
+}
+```
+```
+service docker restart
+```
+
 ### 启动
 ```
 yum install -y git
