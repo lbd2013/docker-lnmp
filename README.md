@@ -7,23 +7,9 @@
 [说明文档](https://docs.docker.com/compose/install/)
 
 ### Docker 换国内源
+[说明文档](https://www.daocloud.io/mirror)
 ```
-sudo vim /etc/docker/daemon.json
-```
-```
-{
-    "registry-mirrors": [
-        "https://kfwkfulq.mirror.aliyuncs.com",
-        "https://2lqq34jg.mirror.aliyuncs.com",
-        "https://pee6w651.mirror.aliyuncs.com",
-        "https://registry.docker-cn.com",
-        "http://hub-mirror.c.163.com"
-    ],
-    "dns": ["8.8.8.8","8.8.4.4"]
-}
-```
-```
-service docker restart
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io
 ```
 
 ### 启动
