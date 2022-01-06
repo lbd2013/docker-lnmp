@@ -1,4 +1,5 @@
 FROM alpine:3.10
+RUN echo -e 'https://mirrors.aliyun.com/alpine/v3.8/main/\nhttps://mirrors.aliyun.com/alpine/v3.8/community/' > /etc/apk/repositories
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN addgroup -g 11211 memcache && adduser -D -u 11211 -G memcache memcache
