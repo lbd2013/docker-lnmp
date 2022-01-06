@@ -1,4 +1,5 @@
 FROM daocloud.io/library/php:5.6-fpm-alpine
+RUN echo -e 'https://mirrors.aliyun.com/alpine/v3.8/main/\nhttps://mirrors.aliyun.com/alpine/v3.8/community/' > /etc/apk/repositories
 COPY config/php.ini /usr/local/etc/php
 
 ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
