@@ -1,5 +1,6 @@
 #FROM daocloud.io/library/php:7.3-fpm-alpine
 FROM daocloud.io/library/php:7.3-fpm
+RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list 
 COPY config/php.ini /usr/local/etc/php
 
 ENV TZ=Asia/Shanghai
