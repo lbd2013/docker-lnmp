@@ -1,20 +1,10 @@
 # <center>使用Docker-compose 部署 LNMP+Redis+Memcache+Mongo+Rabbitmq+Beanstalk+Zabbix+Elk 环境 </center>
 
-### 安装Docker、docker-compose
-```
-# 下载安装
-curl -sSL https://get.docker.com/ | sh
+### 安装Docker
+[说明文档](https://docs.docker.com/engine/install/centos/)
 
-# 设置开机自启
-sudo systemctl enable docker.service
-
-# 启动docker
-sudo service docker start
-
-# 安装docker-compose
-curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-```
+### 安装docker-compose
+[说明文档](https://docs.docker.com/compose/install/)
 
 ### 启动
 ```
