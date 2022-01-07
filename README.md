@@ -21,7 +21,7 @@ systemctl restart docker
 
 ### 启动
 ```
-yum install -y git    或    apt install -y git-all
+yum install -y git  (centos)  或    apt install -y git-all (ubuntu)
 git clone https://github.com/lbd2013/docker-lnmp.git
 cd docker-lnmp
 sh init.sh
