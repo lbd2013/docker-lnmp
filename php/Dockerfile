@@ -10,7 +10,7 @@ RUN set -xe \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo $TZ > /etc/timezone \
     #基础库 git用户 zip等
-    && adduser -s /bin/bash git -D -H \
+    && adduser git \
     && apt-get update \ 
     && apt-get install -y zip unzip libzip-dev \
     #php composer
