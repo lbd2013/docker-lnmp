@@ -10,8 +10,8 @@ RUN set -xe \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo $TZ > /etc/timezone \
     #基础库 git用户 zip等
-    && apt-get update \ 
     && adduser -s /bin/bash git -D -H \
+    && apt-get update \ 
     && apt-get install -y zip unzip libzip-dev \
     #php composer
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
