@@ -8,7 +8,7 @@ ecs.g5.large   2 vCPU 8 GiB （I/O优化）
 ### 安装Docker-compose
 [说明文档](https://docs.docker.com/compose/install/)
 
-### Docker 换国内源
+### Docker 换国内源（按需）
 [说明文档](https://www.daocloud.io/mirror)
 ```
 查看配置：/etc/docker/daemon.json
