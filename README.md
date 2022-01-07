@@ -1,4 +1,6 @@
 # <center>使用Docker-compose 部署 LNMP+Redis+Memcache+Mongo+Rabbitmq+Beanstalk+Zabbix+Elk 环境 </center>
+### 机器配置
+ecs.g5.large   2 vCPU 8 GiB （I/O优化）  
 
 ### 安装Docker
 [说明文档](https://docs.docker.com/engine/install/centos/)
