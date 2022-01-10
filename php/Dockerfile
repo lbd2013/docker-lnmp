@@ -12,7 +12,7 @@ RUN set -xe \
     #基础库 git用户 zip等
     && adduser git \
     && apt-get update \ 
-    && apt-get install -y zip unzip libzip-dev \
+    && apt-get install -y zip unzip libzip-dev libcurl4-openssl-dev pkg-config libssl-dev \
     #php composer
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     #只需要普通安装的php扩展：pdo、mysqli、pcntl、zip、bcmath
