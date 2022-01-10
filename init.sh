@@ -1,3 +1,4 @@
+set -xe
 chmod -R 777 ./log
 chmod -R 777 ./redis/data
 chmod -R 777 ./mongod/data
