@@ -23,8 +23,8 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 2292,
   "graphTooltip": 0,
-  "id": 8,
-  "iteration": 1641808376975,
+  "id": 2,
+  "iteration": 1641888473939,
   "links": [
     {
       "icon": "external link",
@@ -55,10 +55,6 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
-      },
       "decimals": 0,
       "editable": true,
       "error": false,
@@ -116,7 +112,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -173,10 +169,6 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
-      },
       "decimals": 0,
       "editable": true,
       "error": false,
@@ -247,7 +239,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -305,10 +297,6 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
-      },
       "editable": true,
       "error": false,
       "fontSize": "80%",
@@ -361,7 +349,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -388,10 +376,6 @@
       "combine": {
         "label": "Others",
         "threshold": 0
-      },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
       },
       "editable": true,
       "error": false,
@@ -444,7 +428,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -464,10 +448,6 @@
       "valueName": "total"
     },
     {
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -545,7 +525,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -566,10 +546,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -648,7 +624,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -676,10 +652,6 @@
       "combine": {
         "label": "Others",
         "threshold": 0
-      },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
       },
       "editable": true,
       "error": false,
@@ -732,7 +704,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -759,10 +731,6 @@
       "combine": {
         "label": "Others",
         "threshold": 0
-      },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
       },
       "editable": true,
       "error": false,
@@ -815,7 +783,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -842,10 +810,6 @@
       "combine": {
         "label": "Others",
         "threshold": 0
-      },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
       },
       "editable": true,
       "error": false,
@@ -898,7 +862,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -925,10 +889,6 @@
       "combine": {
         "label": "Others",
         "threshold": 0
-      },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
       },
       "editable": true,
       "error": false,
@@ -981,7 +941,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -1008,10 +968,6 @@
       "combine": {
         "label": "Others",
         "threshold": 0
-      },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
       },
       "editable": true,
       "error": false,
@@ -1064,7 +1020,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -1091,10 +1047,6 @@
       "combine": {
         "label": "Others",
         "threshold": 0
-      },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
       },
       "editable": true,
       "error": false,
@@ -1147,7 +1099,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -1174,10 +1126,6 @@
       "combine": {
         "label": "Others",
         "threshold": 0
-      },
-      "datasource": {
-        "type": "elasticsearch",
-        "uid": "TbQ6IGJnk"
       },
       "editable": true,
       "error": false,
@@ -1231,7 +1179,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "TbQ6IGJnk"
+            "uid": "1gPc7V17k"
           },
           "dsType": "elasticsearch",
           "metrics": [
@@ -1252,7 +1200,7 @@
       "valueName": "total"
     }
   ],
-  "refresh": "30s",
+  "refresh": "",
   "schemaVersion": 34,
   "style": "dark",
   "tags": [],
@@ -1267,7 +1215,7 @@
         },
         "datasource": {
           "type": "elasticsearch",
-          "uid": "TbQ6IGJnk"
+          "uid": "1gPc7V17k"
         },
         "definition": "",
         "hide": 0,
@@ -1294,7 +1242,7 @@
         },
         "datasource": {
           "type": "elasticsearch",
-          "uid": "TbQ6IGJnk"
+          "uid": "1gPc7V17k"
         },
         "definition": "",
         "hide": 0,
@@ -1490,6 +1438,6 @@
   "timezone": "browser",
   "title": "nginx 日志分析 Copy",
   "uid": "CsJs2GJnk",
-  "version": 1,
+  "version": 13,
   "weekStart": ""
 }
