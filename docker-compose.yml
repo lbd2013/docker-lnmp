@@ -240,6 +240,7 @@ services:
       - 3000:3000
     networks:
       - backend
+      - elk
     volumes:
       - ./grafana/data:/var/lib/grafana
 
