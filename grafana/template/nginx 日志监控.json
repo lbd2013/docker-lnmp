@@ -1,0 +1,7 @@
+https://grafana.com/grafana/dashboards/11190
+
+11190
+
+1. 删除最上面的地图插件以及最下面的日志一栏表插件
+2. 配置中，Variables -> 增加0 （0,1,2,3,4,5,10）
+3. 基本概况/客户端数据详情 报表类型由 table(old) 改为 table
