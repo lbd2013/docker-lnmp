@@ -1,7 +1,7 @@
 version: '3.2'
 
 services:
-  elasticsearch:
+  elasticsearch: #账号: elastic 密码: changeme
     build:
       context: ./elk/elasticsearch/
       args:
