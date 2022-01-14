@@ -269,6 +269,20 @@ services:
       - 9090:9090
     networks:
       - backend
+      
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    networks:
+      - backend
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
+    ports:
+      - "9100:9100"
+
 networks:
   frontend:
   backend:
