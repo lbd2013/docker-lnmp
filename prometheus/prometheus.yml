@@ -6,6 +6,9 @@ scrape_configs:
   - job_name: 'main'
     static_configs:
       - targets: ['cadvisor:8080'] #使用的是容器的端口，而不是映射到机器的端口
-  - job_name: "test-1"
+  - job_name: "node_exporter"        # linux 监控
     static_configs:
     - targets: ['node_exporter:9100'] # 如果是别的机器，需要用阿里云内网ip
+  - job_name: "nginx_exporter"       # nginx 监控
+    static_configs:
+    - targets: ['nginx_exporter:9113'] # 如果是别的机器，需要用阿里云内网ip
