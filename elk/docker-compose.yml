@@ -25,6 +25,7 @@ services:
       args:
         ELK_VERSION: 7.4.2
     volumes:
+      - ./elk/logstash/geo/GeoLite2-City.mmdb:/usr/share/logstash/GeoLite2-City.mmdb
       - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
       - ./elk/logstash/patterns/customize_patterns:/usr/share/logstash/customize_patterns
