@@ -282,6 +282,19 @@ services:
       - '/:/host:ro,rslave'
     ports:
       - "9100:9100"
+      
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:0.10.0
+    container_name: nginx_exporter
+    command:
+      - -nginx.scrape-uri
+      - http://nginx/basic_status
+    ports:
+      - 9113:9113
+    networks:
+      - backend
+      - frontend
+
 
 networks:
   frontend:
