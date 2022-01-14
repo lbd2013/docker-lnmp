@@ -8,4 +8,4 @@ scrape_configs:
       - targets: ['cadvisor:8080'] #使用的是容器的端口，而不是映射到机器的端口
   - job_name: "test-1"
     static_configs:
-    - targets: ['172.31.99.242:9100'] # 改成你的阿里云内网ip
+    - targets: ['node_exporter:9100'] # 如果是别的机器，需要用阿里云内网ip
