@@ -2,10 +2,15 @@
 filebeat.registry.path: /etc/registry
 
 filebeat.inputs:
+  # 收集nginx日志
   - type: log
     enabled: true
     paths:
       - /logs/nginx/access.log
+    # 日志是json开启这个
+    json.keys_under_root: true
+    json.overwrite_keys: true
+    json.add_error_key: true
     tags: ["nginx-access"]
     fields_under_root: true
 
