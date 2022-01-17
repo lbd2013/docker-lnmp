@@ -16,8 +16,7 @@ ecs.g5.large   2 vCPU 8 GiB （I/O优化）
 curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io
 
 
-systemctl daemon-reload
-systemctl restart docker 
+sudo systemctl restart docker 
 
 ```
 
