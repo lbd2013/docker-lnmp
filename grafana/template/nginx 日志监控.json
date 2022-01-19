@@ -1,7 +1,7 @@
 https://grafana.com/grafana/dashboards/11190
 
 11190
-
-1. É¾³ý×îÉÏÃæµÄµØÍ¼²å¼þÒÔ¼°×îÏÂÃæµÄÈÕÖ¾Ò»À¸±í²å¼þ
-2. ÅäÖÃÖÐ£¬Variables -> Ôö¼Ó0 £¨0,1,2,3,4,5,10£©
-3. »ù±¾¸Å¿ö/¿Í»§¶ËÊý¾ÝÏêÇé ±¨±íÀàÐÍÓÉ table(old) ¸ÄÎª table
+1. å®‰è£… piechart æ’ä»¶
+2. åˆ é™¤æœ€ä¸Šé¢çš„åœ°å›¾æ’ä»¶ä»¥åŠæœ€ä¸‹é¢çš„æ—¥å¿—ä¸€æ è¡¨æ’ä»¶
+3. é…ç½®ä¸­ï¼ŒVariables -> å¢žåŠ 0 ï¼ˆ0,1,2,3,4,5,10ï¼‰
+4. åŸºæœ¬æ¦‚å†µ/å®¢æˆ·ç«¯æ•°æ®è¯¦æƒ… æŠ¥è¡¨ç±»åž‹ç”± table(old) æ”¹ä¸º table
