@@ -4,4 +4,6 @@ https://grafana.com/grafana/dashboards/11190
 1. 安装 piechart 插件
 2. 删除最上面的地图插件以及最下面的日志一栏表插件
 3. 配置中，Variables -> 增加0 （0,1,2,3,4,5,10）
-4. 基本概况/客户端数据详情 报表类型由 table(old) 改为 table
+5. setting -> Json model 中，搜索 "table-old" 替换成 table
+6. setting -> Json model 中，搜索 "请求时间" ，找到上面的 current 数组，将默认值从 2 改为 0
+
