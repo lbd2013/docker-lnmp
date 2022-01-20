@@ -38,8 +38,6 @@ services:
     container_name: php
     cap_add:
       - SYS_PTRACE
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
 
   #php5.6
