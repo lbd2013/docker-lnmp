@@ -16,6 +16,8 @@ xdebug.discover_client_host = 1
 xdebug.client_port=9007
 ```
 
+注意：这里要重启 php、nginx 两个容器
+
 ### 3. phpstorm 配置
 ![avatar](php/phpsotrm_server%E9%85%8D%E7%BD%AE1.jpg)
 ![avatar](php/phpsotrm_server%E9%85%8D%E7%BD%AE2.jpg)
