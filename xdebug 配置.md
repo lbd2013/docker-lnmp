@@ -1,7 +1,7 @@
 ### 1. 通过 xdebug 检测工具器找到合适版本的 xdebug
    将 phpinfo() 的全部信息 拷贝到 https://xdebug.org/wizard
    根据网页提示，编译安装 xdebug 工具，需要注意的是，编译安装的时候是在容器内而不是在宿主机
-### 2. php.ini 文件中，添加一下参数：
+### 2. php.ini 文件中，添加一下参数(只适用于xdebug 3)：
 ```
 [Xdebug]
 zend_extension = xdebug.so
