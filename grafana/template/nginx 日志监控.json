@@ -1,7 +1,7 @@
 https://grafana.com/grafana/dashboards/11190
 
 11190
-1. 安装 piechart 插件
+1. 安装 pie chart 插件
 2. 删除最上面的地图插件以及最下面的日志一栏表插件
 3. 配置中，Variables -> 增加0 （0,1,2,3,4,5,10）
 5. setting -> Json model 中，搜索 "table-old" 替换成 table
