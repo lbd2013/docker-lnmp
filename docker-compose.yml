@@ -27,7 +27,7 @@ services:
       - "9000:9000"
     volumes:
       - ./www:/var/www/html
-	  - ./php/module/xdebug.so:/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so
+      - ./php/module/xdebug.so:/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
       - ./php/config/php-fpm.conf:/usr/local/etc/php-fpm.conf
       - ./php/config/php-fpm.d:/usr/local/etc/php-fpm.d
