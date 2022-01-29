@@ -22,8 +22,9 @@ sudo systemctl restart docker
 
 ### 安装 git
 ```
-centos: 
-yum install -y git
+centos: (# centos 用yum直接安装的 git 是 1.8 版本，使用起来问题比较多)
+sudo yum install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo.x86_64.rpm
+yum install -y git  
 
 ubuntu:
 apt install -y git-all
